@@ -39,48 +39,48 @@ INSERT INTO permission_type (name) VALUES ('Delete');
 INSERT INTO permission_type (name) VALUES ('Create');
 
 /***********************************************************************
-    Notes on the user table and its associate dependant tables
+    Notes on the person table and its associate dependant tables
     
-    1. INSERT INTO user(is_virtual) VALUES(false);
-    2. INSERT INTO account(username,password,now(),true,1,1,user.id)
-    3. INSERT INTO address, using user.id FK
+    1. INSERT INTO person(is_virtual) VALUES(false);
+    2. INSERT INTO account(username,password,now(),true,1,1,person.id)
+    3. INSERT INTO address, using person.id FK
                 
-    So, we create a row in the user table using data in other tables.
-   This means we need to insert the user first, get the insert id, then insert the others
-   with the id and then update the user row with the ids from the others to maintain
+    So, we create a row in the person table using data in other tables.
+   This means we need to insert the person first, get the insert id, then insert the others
+   with the id and then update the person row with the ids from the others to maintain
    referential integrity.
         
      Case 2 illustrates the purpose of the design - we want to allow members to send gifts to friends
-    periodically. So, they can create a new "virtual" user with name and address and store it
+    periodically. So, they can create a new "virtual" person with name and address and store it
     making it available as an selection when they choose a shipping address during a checkout.
-    This way, we can have other names and address tied to the Person instead of the Account
-    thus keeping the one to one relationship of user - account while allowing multiple names
+    This way, we can have other names and address tied to the User instead of the Account
+    thus keeping the one to one relationship of person - account while allowing multiple names
     and address within normal forms (without duplication). Any additional name and address
-    must be other than type primary and type primary must exist for a Person in order for them
+    must be other than type primary and type primary must exist for a User in order for them
     to make a purchase.
     
 
    Use case - Member Registration:
     * Chooses username and login, optional address info (this would define them as a customer) ..
-        1. create user object with defaults
-        2. create account object using user.id - an account is tied to a single user
-        3. if address info, create address object FK user_id gets user.id, type is set to primary
+        1. create person object with defaults
+        2. create account object using person.id - an account is tied to a single person
+        3. if address info, create address object FK person_id gets person.id, type is set to primary
             else - error.
         4. repeat for phone, email, shipping, billing - all optional
         
-    Use case - Member addition (ie, adds a gift address/user ):
+    Use case - Member addition (ie, adds a gift address/person ):
         1. User fills in fields - collect and perform inserts as above
-        2. Set address.user_id to new user.id
+        2. Set address.person_id to new person.id
         3. Set type to billing, friend, etc - mandatory, if not, then this defaults to an address change
 
     Use case - Administrator addition:
         1. If no account exists, steps 1 - 2 of  Use Case 1.
         2. Else, (or after 1.) proceed as in Use Case 2  assigning FK id columns to an existing
-        or newly created row in user (eg. address.user_id = user.id)
+        or newly created row in person (eg. address.person_id = person.id)
         
 ******************************************************************************/
 
-CREATE TABLE `user` (
+CREATE TABLE `person` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name_prefix` VARCHAR(32) DEFAULT '', -- 'eg. Mr., Ms ..',
   `first_name` VARCHAR(256) NOT NULL,
@@ -88,14 +88,14 @@ CREATE TABLE `user` (
   `last_name` VARCHAR(256) NOT NULL,
   `name_suffix` VARCHAR(32) DEFAULT '', -- 'eg. PhD. MD, etc ..',
   `nick_name` VARCHAR(128) DEFAULT 'Anonymous',
-  `avatar_uri` VARCHAR(256) , -- optional avatar image for user
+  `avatar_uri` VARCHAR(256) , -- optional avatar image for person
   `company_name` VARCHAR(256) DEFAULT '',
-  `owner_user_id` BIGINT UNSIGNED,
+  `owner_person_id` BIGINT UNSIGNED,
   `is_virtual` BOOL DEFAULT FALSE, -- true for persons in members' addressbook, suppliers, manufacturers ...
   CONSTRAINT pk_person PRIMARY KEY (`id`),
-  INDEX idx_user_firstname (`first_name`),
-  INDEX idx_user_last_name (`last_name`),
-  FOREIGN KEY (`owner_user_id`) REFERENCES user(`id`) ON DELETE CASCADE
+  INDEX idx_person_firstname (`first_name`),
+  INDEX idx_person_last_name (`last_name`),
+  FOREIGN KEY (`owner_person_id`) REFERENCES person(`id`) ON DELETE CASCADE
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -103,10 +103,10 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE TABLE `email_address` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `url` VARCHAR(128) NOT NULL,
-  `user_id` BIGINT UNSIGNED NOT NULL,
+  `person_id` BIGINT UNSIGNED NOT NULL,
   `is_primary` TINYINT UNSIGNED DEFAULT 0,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES user(`id`) ON DELETE CASCADE
+  FOREIGN KEY (`person_id`) REFERENCES person(`id`) ON DELETE CASCADE
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -114,10 +114,10 @@ CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE TABLE `phone_number` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `number` VARCHAR(32) NOT NULL,
-  `user_id` BIGINT UNSIGNED NOT NULL,
+  `person_id` BIGINT UNSIGNED NOT NULL,
   `is_primary` TINYINT UNSIGNED DEFAULT 0,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) REFERENCES user(`id`) ON DELETE CASCADE
+  FOREIGN KEY (`person_id`) REFERENCES person(`id`) ON DELETE CASCADE
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -164,15 +164,15 @@ CREATE TABLE `account` (
   `valid_password` BOOL NOT NULL DEFAULT TRUE,
   `type_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   `status_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,
-  `user_id` BIGINT UNSIGNED NOT NULL,
+  `person_id` BIGINT UNSIGNED NOT NULL,
   CONSTRAINT pk_account PRIMARY KEY (`id`),
   UNIQUE KEY idx_account_username (`username`),
-  UNIQUE KEY idx_account_person (`user_id`),
+  UNIQUE KEY idx_account_person (`person_id`),
   INDEX idx_account_type (`type_id`),
   INDEX idx_account_status (`status_id`),
   FOREIGN KEY (`type_id`) REFERENCES account_type(`id`),
   FOREIGN KEY (`status_id`) REFERENCES account_status_type(`id`),
-  FOREIGN KEY (`user_id`) REFERENCES user(`id`) ON DELETE CASCADE
+  FOREIGN KEY (`person_id`) REFERENCES person(`id`) ON DELETE CASCADE
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci
@@ -228,7 +228,7 @@ INSERT INTO address_type (name) VALUES ('Historical');
 CREATE TABLE `address` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(256) DEFAULT 'My Address', -- for human reference, eg. "Dad" or "Uncle Ed"
-  `user_id` BIGINT UNSIGNED NOT NULL,
+  `person_id` BIGINT UNSIGNED NOT NULL,
   `street_1` VARCHAR(256) ,
   `street_2` VARCHAR(256) ,
   `suburb` VARCHAR(256) ,
@@ -249,7 +249,7 @@ CREATE TABLE `address` (
   FOREIGN KEY (`zone_id`) REFERENCES zone_type(`id`),
   FOREIGN KEY (`country_id`) REFERENCES country_type(`id`),
   FOREIGN KEY (`type_id`) REFERENCES address_type(`id`),
-  FOREIGN KEY (`user_id`) REFERENCES user(`id`)
+  FOREIGN KEY (`person_id`) REFERENCES person(`id`)
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -313,8 +313,8 @@ CREATE TABLE `product` (
   INDEX idx_product_status (`status_id`),
   FOREIGN KEY (`type_id`) REFERENCES product_type(`id`),
   FOREIGN KEY (`status_id`) REFERENCES product_status_type(`id`),
-  FOREIGN KEY (`manufacturer_id`) REFERENCES user(`id`) ON DELETE SET NULL,
-  FOREIGN KEY (`supplier_id`) REFERENCES user(`id`) ON DELETE SET NULL
+  FOREIGN KEY (`manufacturer_id`) REFERENCES person(`id`) ON DELETE SET NULL,
+  FOREIGN KEY (`supplier_id`) REFERENCES person(`id`) ON DELETE SET NULL
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -846,7 +846,7 @@ CREATE TABLE `content_item` (
   INDEX idx_content_status (`status_id`),
   FOREIGN KEY (`status_id`) REFERENCES `content_status_type`(`id`),
   FOREIGN KEY (`type_id`) REFERENCES `content_type`(`id`),
-  FOREIGN KEY (`creator_id`) REFERENCES `user`(`id`)
+  FOREIGN KEY (`creator_id`) REFERENCES `person`(`id`)
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -886,7 +886,7 @@ INSERT INTO page_type (name) VALUES ('Home');
 INSERT INTO page_type (name) VALUES ('Login');
 INSERT INTO page_type (name) VALUES ('UserHome');
 INSERT INTO page_type (name) VALUES ('EditContactInfo');
-INSERT INTO page_type (name) VALUES ('EditPersons');
+INSERT INTO page_type (name) VALUES ('EditUsers');
 INSERT INTO page_type (name) VALUES ('Product');
 INSERT INTO page_type (name) VALUES ('ProductList');
 INSERT INTO page_type (name) VALUES ('ShoppingCartView');
@@ -1156,13 +1156,13 @@ ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE TABLE `person_usergroup_assn` (
-    `user_id` BIGINT UNSIGNED NOT NULL,
+    `person_id` BIGINT UNSIGNED NOT NULL,
     `usergroup_id` MEDIUMINT UNSIGNED NOT NULL DEFAULT 1,
-    CONSTRAINT pk_user_usergroup PRIMARY KEY (`usergroup_id`,`user_id`),
-    INDEX idx_user_usergroup_person(`user_id`),
-    INDEX idx_user_usergroup_usergroup(`usergroup_id`),
+    CONSTRAINT pk_person_usergroup PRIMARY KEY (`usergroup_id`,`person_id`),
+    INDEX idx_person_usergroup_person(`person_id`),
+    INDEX idx_person_usergroup_usergroup(`usergroup_id`),
     FOREIGN KEY (`usergroup_id`) REFERENCES usergroup(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`user_id`) REFERENCES user(`id`) ON DELETE CASCADE
+    FOREIGN KEY (`person_id`) REFERENCES person(`id`) ON DELETE CASCADE
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
