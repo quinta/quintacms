@@ -34,7 +34,7 @@
 		public $chkIsCurrent;
 		public $lstType;
 		public $lblCreationDate;
-		public $lblLastModificationDate;
+		public $lblLastModification;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 
@@ -78,7 +78,7 @@
 			$this->chkIsCurrent = $this->mctAddress->chkIsCurrent_Create();
 			$this->lstType = $this->mctAddress->lstType_Create();
 			$this->lblCreationDate = $this->mctAddress->lblCreationDate_Create();
-			$this->lblLastModificationDate = $this->mctAddress->lblLastModificationDate_Create();
+			$this->lblLastModification = $this->mctAddress->lblLastModification_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

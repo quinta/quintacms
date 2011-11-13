@@ -5,6 +5,8 @@
 
 		<?php $_CONTROL->txtQuantity->RenderWithName(); ?>
 
+		<?php $_CONTROL->lstStatus->RenderWithName(); ?>
+
 	</div>
 
 	<div id="formActions">

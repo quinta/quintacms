@@ -104,7 +104,7 @@
 			$this->dtgAddresses->MetaAddColumn('IsCurrent');
 			$this->dtgAddresses->MetaAddTypeColumn('TypeId', 'AddressType');
 			$this->dtgAddresses->MetaAddColumn('CreationDate');
-			$this->dtgAddresses->MetaAddColumn('LastModificationDate');
+			$this->dtgAddresses->MetaAddColumn('LastModification');
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);

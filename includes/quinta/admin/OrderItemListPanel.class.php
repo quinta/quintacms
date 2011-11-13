@@ -65,9 +65,10 @@
 
 			// Create the Other Columns (note that you can use strings for order_item's properties, or you
 			// can traverse down QQN::order_item() to display fields that are down the hierarchy)
-			$this->dtgOrderItems->MetaAddColumn(QQN::OrderItem()->Product);
 			$this->dtgOrderItems->MetaAddColumn(QQN::OrderItem()->Order);
+			$this->dtgOrderItems->MetaAddColumn(QQN::OrderItem()->Product);
 			$this->dtgOrderItems->MetaAddColumn('Quantity');
+			$this->dtgOrderItems->MetaAddTypeColumn('StatusId', 'OrderItemStatusType');
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);
@@ -75,8 +76,7 @@
 			$this->btnCreateNew->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnCreateNew_Click'));
 		}
 
-		public function pxyEdit_Click($strFormId, $strControlId, $strParameter)
-		{
+		public function pxyEdit_Click($strFormId, $strControlId, $strParameter) {
 			$strParameterArray = explode(',', $strParameter);
 			$objEditPanel = new OrderItemEditPanel($this, $this->strCloseEditPanelMethod, $strParameterArray[0], $strParameterArray[1]);
 
@@ -84,8 +84,7 @@
 			$this->objForm->$strMethodName($objEditPanel);
 		}
 
-		public function btnCreateNew_Click($strFormId, $strControlId, $strParameter)
-		{
+		public function btnCreateNew_Click($strFormId, $strControlId, $strParameter) {
 			$objEditPanel = new OrderItemEditPanel($this, $this->strCloseEditPanelMethod, null);
 			$strMethodName = $this->strSetEditPanelMethod;
 			$this->objForm->$strMethodName($objEditPanel);

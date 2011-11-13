@@ -7,7 +7,7 @@
 	 *
 	 * Any display customizations and presentation-tier logic can be implemented
 	 * here by overriding existing or implementing new methods, properties and variables.
-	 * 
+	 *
 	 * NOTE: This file is overwritten on any code regenerations.  If you want to make
 	 * permanent changes, it is STRONGLY RECOMMENDED to move both account_edit.php AND
 	 * account_edit.tpl.php out of this Form Drafts directory.
@@ -20,8 +20,8 @@
 		protected $mctAccount;
 		protected $objAccount;
 		protected $pnlListPanel;
-					  
-		public $dtgOrders;  
+
+		public $dtgOrders;
 		public $objPaginator;
 		public $pxyViewOrder;
 
@@ -53,7 +53,7 @@
 		public function __construct($objParentObject, $strClosePanelMethod, $intId = null, $strControlId = null)
 		{
 			$this->pnlListPanel =& $objParentObject;
-			
+
 			// Call the Parent
 			try {
 				parent::__construct($objParentObject, $strControlId);
@@ -75,7 +75,7 @@
 			$this->lblRegistrationDate = $this->mctAccount->lblRegistrationDate_Create();
 			$this->txtUsername = $this->mctAccount->txtUsername_Create();
 			$this->txtPassword = $this->mctAccount->txtPassword_Create();
-			$this->txtPassword->Required = false;           
+			$this->txtPassword->Required = false;
 			$this->txtNotes = $this->mctAccount->txtNotes_Create();
 			$this->lblLastLogin = $this->mctAccount->lblLastLogin_Create();
 			$this->txtLoginCount = $this->mctAccount->txtLoginCount_Create();
@@ -100,22 +100,22 @@
 			$this->pxyViewOrder->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'pxyViewOrder_Click'));
 
 			$this->dtgOrders->MetaAddProxyColumn($this->pxyViewOrder, 'Id');
-					 
+
 			$this->dtgOrders->MetaAddColumn('CreationDate');
-			$this->dtgOrders->MetaAddColumn('LastModificationDate');
+			$this->dtgOrders->MetaAddColumn('LastModification');
 			$this->dtgOrders->MetaAddColumn('CompletionDate');
 			$this->dtgOrders->MetaAddColumn(QQN::Order()->ShippingMethod);
 			$this->dtgOrders->MetaAddColumn(QQN::Order()->PaymentMethod);
 			$this->dtgOrders->MetaAddTypeColumn('StatusId', 'OrderStatusType');
-			
+
 			$strOrderTotalParam = '<?= money_format("%n", $_ITEM->ProductTotalCharged '
 												 . ' + $_ITEM->ShippingCharged '
 												 . ' + $_ITEM->HandlingCharged '
 												 . ' + $_ITEM->Tax ) ?>';
 			$objOrderTotalColumn = new QDataGridColumn('Order Total', $strOrderTotalParam );
 			$this->dtgOrders->AddColumn($objOrderTotalColumn);
-			
-			// Create Buttons 
+
+			// Create Buttons
 			$this->btnSave = new QButton($this);
 			$this->btnSave->Text = QApplication::Translate('Save');
 			$this->btnSave->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnSave_Click'));
@@ -142,7 +142,7 @@
 		{
 			if ($this->objPaginator)
 				$this->dtgOrders->TotalItemCount = Order::CountByAccountId($this->objAccount->Id) ;
-			
+
 			$objClauses = array();
 
 			// If a column is selected to be sorted, and if that column has a OrderByClause set on it, then let's add
@@ -155,19 +155,19 @@
 				array_push($objClauses, $objClause);
 
 			array_push($objClauses, QQ::OrderBy(QQN::Order()->CreationDate, false) );
-			
+
 
 			$this->dtgOrders->DataSource = Order::LoadArrayByAccountId(
 				$this->objAccount->Id, $objClauses
 			);
 		}
-		
+
 		public function pxyViewOrder_Click($strFormId, $strControlId, $strParameter)
 		{
 			//die($strParameter);
-			
+
 			$strParameterArray = explode(',', $strParameter);
-			
+
 //            $objEditPanel = new OrderEditPanel($this, $this->strCloseEditPanelMethod, $strParameterArray[0]);
 //            $objEditPanel = new OrderEditPanel($this, 'CloseEditPane', $strParameterArray[0]);
 			$objEditPanel = new OrderEditPanel($this->pnlListPanel , 'CloseEditPane', $strParameter);

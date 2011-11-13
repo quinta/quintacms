@@ -30,9 +30,6 @@
 		public $chkShowDescription;
 		public $lstContentBlock;
 		public $lstParentModule;
-		public $lstPublicPermissions;
-		public $lstUserPermissions;
-		public $lstGroupPermissions;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 
@@ -72,9 +69,6 @@
 			$this->chkShowDescription = $this->mctModule->chkShowDescription_Create();
 			$this->lstContentBlock = $this->mctModule->lstContentBlock_Create();
 			$this->lstParentModule = $this->mctModule->lstParentModule_Create();
-			$this->lstPublicPermissions = $this->mctModule->lstPublicPermissions_Create();
-			$this->lstUserPermissions = $this->mctModule->lstUserPermissions_Create();
-			$this->lstGroupPermissions = $this->mctModule->lstGroupPermissions_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

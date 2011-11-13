@@ -75,9 +75,6 @@
 			$this->dtgPages->MetaAddColumn('HasLeftColumn');
 			$this->dtgPages->MetaAddColumn('HasRightColumn');
 			$this->dtgPages->MetaAddColumn('HasFooter');
-			$this->dtgPages->MetaAddTypeColumn('PublicPermissionsId', 'PermissionType');
-			$this->dtgPages->MetaAddTypeColumn('UserPermissionsId', 'PermissionType');
-			$this->dtgPages->MetaAddTypeColumn('GroupPermissionsId', 'PermissionType');
 			$this->dtgPages->MetaAddTypeColumn('TypeId', 'PageType');
 			$this->dtgPages->MetaAddTypeColumn('DocTypeId', 'PageDocType');
 			$this->dtgPages->MetaAddTypeColumn('StatusId', 'PageStatusType');

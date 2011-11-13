@@ -25,12 +25,6 @@
 
 		<?php $_CONTROL->lstParentModule->RenderWithName(); ?>
 
-		<?php $_CONTROL->lstPublicPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstUserPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstGroupPermissions->RenderWithName(); ?>
-
 	</div>
 
 	<div id="formActions">

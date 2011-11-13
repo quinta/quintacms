@@ -23,6 +23,7 @@
 		public $lblProduct;
 		public $lblOrder;
 		public $txtQuantity;
+		public $lstStatus;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
 
@@ -34,8 +35,7 @@
 		// Callback
 		protected $strClosePanelMethod;
 
-		public function __construct($objParentObject, $strClosePanelMethod, $intProductId = null, $intOrderId = null, $strControlId = null)
-		 {
+		public function __construct($objParentObject, $strClosePanelMethod, $intOrderId = null, $intProductId = null, $strControlId = null) {
 			// Call the Parent
 			try {
 				parent::__construct($objParentObject, $strControlId);
@@ -50,12 +50,13 @@
 
 			// Construct the OrderItemMetaControl
 			// MAKE SURE we specify "$this" as the MetaControl's (and thus all subsequent controls') parent
-			$this->mctOrderItem = OrderItemMetaControl::Create($this, $intProductId, $intOrderId);
+			$this->mctOrderItem = OrderItemMetaControl::Create($this, $intOrderId, $intProductId);
 
 			// Call MetaControl's methods to create qcontrols based on OrderItem's data fields
 			$this->lblProduct = $this->mctOrderItem->lblProductId_Create();
 			$this->lblOrder = $this->mctOrderItem->lblOrderId_Create();
 			$this->txtQuantity = $this->mctOrderItem->txtQuantity_Create();
+			$this->lstStatus = $this->mctOrderItem->lstStatus_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

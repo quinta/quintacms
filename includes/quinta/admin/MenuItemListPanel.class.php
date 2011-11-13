@@ -73,9 +73,6 @@
 			$this->dtgMenuItems->MetaAddColumn('IsLocal');
 			$this->dtgMenuItems->MetaAddColumn('IsSsl');
 			$this->dtgMenuItems->MetaAddColumn('SortOrder');
-			$this->dtgMenuItems->MetaAddTypeColumn('PublicPermissionsId', 'PermissionType');
-			$this->dtgMenuItems->MetaAddTypeColumn('UserPermissionsId', 'PermissionType');
-			$this->dtgMenuItems->MetaAddTypeColumn('GroupPermissionsId', 'PermissionType');
 			$this->dtgMenuItems->MetaAddTypeColumn('StatusId', 'MenuStatusType');
 			$this->dtgMenuItems->MetaAddTypeColumn('TypeId', 'MenuItemType');
 			$this->dtgMenuItems->MetaAddColumn(QQN::MenuItem()->Page);

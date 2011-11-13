@@ -12,13 +12,12 @@
 	 *
 	 * Any and all changes to this file will be overwritten with any subsequent re-
 	 * code generation.
-	 * 
+	 *
 	 * @package Quinta
 	 * @subpackage Drafts
-	 * 
+	 *
 	 */
-	class OrderListPanel extends QPanel
-	{
+	class OrderListPanel extends QPanel {
 		// Local instance of the Meta DataGrid to list Orders
 		public $dtgOrders;
 
@@ -26,20 +25,20 @@
 		public $btnCreateNew;
 		public $pxyViewOrder;
 		public $pxyViewAccount;
-				
+
 		public $lblMessage;
 
-		public $txtOrderNumberSearch;        
+		public $txtOrderNumberSearch;
 		public $txtAccountNumberSearch;
 		public $lstStatus;
-		
+
 		protected $intOrderStatusId = null;
 		protected $intAccountId = null;
-			  
+
 		// Callback Method Names
 		protected $strSetEditPanelMethod;
 		protected $strCloseEditPanelMethod;
-		
+
 		public function __construct($objParentObject, $strSetEditPanelMethod, $strCloseEditPanelMethod, $strControlId = null) {
 			// Call the Parent
 			try {
@@ -58,26 +57,26 @@
 
 			//messages (eg. Name not found ..)
 			$this->lblMessage = new QLabel($this);
-					 
+
 			$this->txtOrderNumberSearch = new QIntegerTextBox($this);
 			$this->txtOrderNumberSearch->AddAction(new QEnterKeyEvent(), new QServerControlAction($this, 'txtViewOrder_Click'));
 			$this->txtOrderNumberSearch->Name = 'Order No.:';
 			$this->txtOrderNumberSearch->Width = '5em';
 			$this->txtOrderNumberSearch->CausesValidation = $this->txtOrderNumberSearch;
-			
+
 			$this->txtAccountNumberSearch = new QIntegerTextBox($this);
 			$this->txtAccountNumberSearch->AddAction(new QEnterKeyEvent(), new QServerControlAction($this, 'txtViewByAccount_Click'));
 			$this->txtAccountNumberSearch->Name = 'Account No.:';
 			$this->txtAccountNumberSearch->Width = '5em';
 			$this->txtAccountNumberSearch->CausesValidation = $this->txtAccountNumberSearch;
-			
+
 			$this->lstStatus = new QListBox($this, $strControlId);
 			$this->lstStatus->Name = 'Select Status:';
 			$this->lstStatus->AddItem(new QListItem('Any', 0));
 			foreach (OrderStatusType::$NameArray as $intId => $strValue)
 				$this->lstStatus->AddItem(new QListItem($strValue, $intId+1));
 			$this->lstStatus->AddAction(new QChangeEvent(), new QAjaxControlAction($this, 'lstStatus_Selected') );
-			
+
 			// Instantiate the Meta DataGrid
 			$this->dtgOrders = new OrderDataGrid($this);
 			$this->dtgOrders->SetDataBinder('OrderDataBinder', $this);
@@ -96,62 +95,41 @@
 			$this->dtgOrders->MetaAddProxyColumn($this->pxyViewOrder, 'Id');
 			$this->dtgOrders->MetaAddProxyColumn($this->pxyViewAccount, QQN::Order()->Account);
 			$this->dtgOrders->GetColumn(0)->Name = "Order Number";
-					 
+
 			$this->dtgOrders->MetaAddColumn('CreationDate');
-			$this->dtgOrders->MetaAddColumn('LastModificationDate');
+			$this->dtgOrders->MetaAddColumn('LastModification');
 			$this->dtgOrders->MetaAddColumn('CompletionDate');
 			$this->dtgOrders->MetaAddColumn(QQN::Order()->ShippingMethod);
 			$this->dtgOrders->MetaAddColumn(QQN::Order()->PaymentMethod);
 			$this->dtgOrders->MetaAddTypeColumn('StatusId', 'OrderStatusType');
-			
+
 			$strOrderTotalParam = '<?= money_format("%n", $_ITEM->ProductTotalCharged '
 												 . ' + $_ITEM->ShippingCharged '
 												 . ' + $_ITEM->HandlingCharged '
 												 . ' + $_ITEM->Tax ) ?>';
 			$objOrderTotalColumn = new QDataGridColumn('Order Total', $strOrderTotalParam );
 			$this->dtgOrders->AddColumn($objOrderTotalColumn);
-/*          
+
 			$this->dtgOrders->MetaAddColumn('ShippingCost');
 			$this->dtgOrders->MetaAddColumn('ProductTotalCost');
+			$this->dtgOrders->MetaAddColumn('ShippingCost');
 			$this->dtgOrders->MetaAddColumn('ShippingCharged');
+			$this->dtgOrders->MetaAddColumn('HandlingCost');
 			$this->dtgOrders->MetaAddColumn('HandlingCharged');
 			$this->dtgOrders->MetaAddColumn('Tax');
 			$this->dtgOrders->MetaAddColumn('ProductTotalCharged');
-			$this->dtgOrders->MetaAddColumn('ShippingNamePrefix');
-			$this->dtgOrders->MetaAddColumn('ShippingFirstName');
-			$this->dtgOrders->MetaAddColumn('ShippingMiddleName');
-			$this->dtgOrders->MetaAddColumn('ShippingLastName');
-			$this->dtgOrders->MetaAddColumn('ShippingNameSuffix');
-			$this->dtgOrders->MetaAddColumn('ShippingStreet1');
-			$this->dtgOrders->MetaAddColumn('ShippingStreet2');
-			$this->dtgOrders->MetaAddColumn('ShippingSuburb');
-			$this->dtgOrders->MetaAddColumn('ShippingCounty');
-			$this->dtgOrders->MetaAddColumn('ShippingCity');
-			$this->dtgOrders->MetaAddTypeColumn('ShippingZoneId', 'ZoneType');
-			$this->dtgOrders->MetaAddTypeColumn('ShippingCountryId', 'CountryType');
-			$this->dtgOrders->MetaAddColumn('ShippingPostalCode');
-			$this->dtgOrders->MetaAddColumn('BillingNamePrefix');
-			$this->dtgOrders->MetaAddColumn('BillingFirstName');
-			$this->dtgOrders->MetaAddColumn('BillingMiddleName');
-			$this->dtgOrders->MetaAddColumn('BillingLastName');
-			$this->dtgOrders->MetaAddColumn('BillingNameSuffix');
-			$this->dtgOrders->MetaAddColumn('BillingStreet1');
-			$this->dtgOrders->MetaAddColumn('BillingStreet2');
-			$this->dtgOrders->MetaAddColumn('BillingSuburb');
-			$this->dtgOrders->MetaAddColumn('BillingCounty');
-			$this->dtgOrders->MetaAddColumn('BillingCity');
-			$this->dtgOrders->MetaAddTypeColumn('BillingZoneId', 'ZoneType');
-			$this->dtgOrders->MetaAddTypeColumn('BillingCountryId', 'CountryType');
-			$this->dtgOrders->MetaAddColumn('BillingPostalCode');
 			$this->dtgOrders->MetaAddColumn('Notes');
-*/
+			$this->dtgOrders->MetaAddColumn(QQN::Order()->ShippingMethod);
+			$this->dtgOrders->MetaAddColumn(QQN::Order()->PaymentMethod);
+			$this->dtgOrders->MetaAddTypeColumn('StatusId', 'OrderStatusType');
+			$this->dtgOrders->MetaAddTypeColumn('TypeId', 'OrderType');
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);
 			$this->btnCreateNew->Text = QApplication::Translate('Create a New') . ' ' . QApplication::Translate('Order');
 			$this->btnCreateNew->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnCreateNew_Click'));
 		}
-		
+
 
 		public function pxyViewAccount_Click($strFormId, $strControlId, $intOrderId)
 		{
@@ -179,7 +157,7 @@
 			if(Order::Load($intOrderId))
 			{
 				$this->lblMessage->Text = '';
-				
+
 				$objEditPanel = new OrderEditPanel($this, $this->strCloseEditPanelMethod, $intOrderId );
 
 				$strMethodName = $this->strSetEditPanelMethod;
@@ -195,10 +173,10 @@
 		}
 		public function lstStatus_Selected($strFormId, $strControlId, $strParameter)
 		{
-			$this->intOrderStatusId = $this->lstStatus->SelectedIndex;            
+			$this->intOrderStatusId = $this->lstStatus->SelectedIndex;
 			$this->dtgOrders->Refresh();
 		}
-		
+
 		public function OrderDataBinder()
 		{
 			$objClauses = array();
@@ -208,7 +186,7 @@
 
 			if ($objClause = $this->dtgOrders->LimitClause)
 				array_push($objClauses, $objClause);
-			
+
 			if($this->intOrderStatusId && $this->intAccountId)
 			{
 				$this->dtgOrders->TotalItemCount = Order::QueryCount(QQ::AndCondition(
@@ -220,12 +198,12 @@
 											 $objClauses );
 			}
 			elseif($this->intOrderStatusId )
-			{    
+			{
 				$this->dtgOrders->TotalItemCount = Order::QueryCount(QQ::Equal(QQN::Order()->StatusId, $this->intOrderStatusId));
 				$aryOrders = Order::QueryArray(QQ::Equal( QQN::Order()->StatusId, $this->intOrderStatusId), $objClauses );
 			}
 			elseif($this->intAccountId )
-			{    
+			{
 				$this->dtgOrders->TotalItemCount = Order::QueryCount(QQ::Equal(QQN::Order()->AccountId, $this->intAccountId));
 				$aryOrders = Order::QueryArray(QQ::Equal( QQN::Order()->AccountId, $this->intAccountId), $objClauses );
 			}

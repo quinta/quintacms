@@ -28,9 +28,6 @@
 		public $chkIsLocal;
 		public $chkIsSsl;
 		public $txtSortOrder;
-		public $lstPublicPermissions;
-		public $lstUserPermissions;
-		public $lstGroupPermissions;
 		public $lstStatus;
 		public $lstType;
 		public $lstPage;
@@ -72,9 +69,6 @@
 			$this->chkIsLocal = $this->mctMenuItem->chkIsLocal_Create();
 			$this->chkIsSsl = $this->mctMenuItem->chkIsSsl_Create();
 			$this->txtSortOrder = $this->mctMenuItem->txtSortOrder_Create();
-			$this->lstPublicPermissions = $this->mctMenuItem->lstPublicPermissions_Create();
-			$this->lstUserPermissions = $this->mctMenuItem->lstUserPermissions_Create();
-			$this->lstGroupPermissions = $this->mctMenuItem->lstGroupPermissions_Create();
 			$this->lstStatus = $this->mctMenuItem->lstStatus_Create();
 			$this->lstType = $this->mctMenuItem->lstType_Create();
 			$this->lstPage = $this->mctMenuItem->lstPage_Create();

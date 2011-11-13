@@ -27,8 +27,8 @@
 		public $txtLastName;
 		public $txtNameSuffix;
 		public $txtNickName;
-		public $txtEmailAddress;
-		public $txtPhoneNumber;
+//		public $txtEmailAddress;
+//		public $txtPhoneNumber;
 		public $txtAvatarUri;
 		public $txtCompanyName;
 		public $lstOwnerPerson;
@@ -71,8 +71,8 @@
 			$this->txtLastName = $this->mctPerson->txtLastName_Create();
 			$this->txtNameSuffix = $this->mctPerson->txtNameSuffix_Create();
 			$this->txtNickName = $this->mctPerson->txtNickName_Create();
-			$this->txtEmailAddress = $this->mctPerson->txtEmailAddress_Create();
-			$this->txtPhoneNumber = $this->mctPerson->txtPhoneNumber_Create();
+//			$this->txtEmailAddress = $this->mctPerson->txtEmailAddress_Create();
+//			$this->txtPhoneNumber = $this->mctPerson->txtPhoneNumber_Create();
 			$this->txtAvatarUri = $this->mctPerson->txtAvatarUri_Create();
 			$this->txtCompanyName = $this->mctPerson->txtCompanyName_Create();
 			$this->lstOwnerPerson = $this->mctPerson->lstOwnerPerson_Create();

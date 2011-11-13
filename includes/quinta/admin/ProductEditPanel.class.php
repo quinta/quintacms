@@ -40,12 +40,9 @@
 		public $lstType;
 		public $lstStatus;
 		public $txtViewCount;
-		public $lstUserPermissions;
-		public $lstPublicPermissions;
-		public $lstGroupPermissions;
 
 		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
-		public $lstProductCategoriesAsCategory;
+		public $lstProductCategories;
 		public $lstParentProductsAsRelated;
 		public $lstProductsAsRelated;
 
@@ -95,12 +92,9 @@
 			$this->lstType = $this->mctProduct->lstType_Create();
 			$this->lstStatus = $this->mctProduct->lstStatus_Create();
 			$this->txtViewCount = $this->mctProduct->txtViewCount_Create();
-			$this->lstUserPermissions = $this->mctProduct->lstUserPermissions_Create();
-			$this->lstPublicPermissions = $this->mctProduct->lstPublicPermissions_Create();
-			$this->lstGroupPermissions = $this->mctProduct->lstGroupPermissions_Create();
-// 			$this->lstProductCategoriesAsCategory = $this->mctProduct->lstProductCategoriesAsCategory_Create();
-// 			$this->lstParentProductsAsRelated = $this->mctProduct->lstParentProductsAsRelated_Create();
-// 			$this->lstProductsAsRelated = $this->mctProduct->lstProductsAsRelated_Create();
+			$this->lstProductCategories = $this->mctProduct->lstProductCategories_Create();
+			$this->lstParentProductsAsRelated = $this->mctProduct->lstParentProductsAsRelated_Create();
+			$this->lstProductsAsRelated = $this->mctProduct->lstProductsAsRelated_Create();
 
 			// Create Buttons and Actions on this Form
 			$this->btnSave = new QButton($this);

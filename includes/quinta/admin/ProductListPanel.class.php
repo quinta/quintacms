@@ -85,9 +85,6 @@
 			$this->dtgProducts->MetaAddTypeColumn('TypeId', 'ProductType');
 			$this->dtgProducts->MetaAddTypeColumn('StatusId', 'ProductStatusType');
 			$this->dtgProducts->MetaAddColumn('ViewCount');
-			$this->dtgProducts->MetaAddTypeColumn('UserPermissionsId', 'PermissionType');
-			$this->dtgProducts->MetaAddTypeColumn('PublicPermissionsId', 'PermissionType');
-			$this->dtgProducts->MetaAddTypeColumn('GroupPermissionsId', 'PermissionType');
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);

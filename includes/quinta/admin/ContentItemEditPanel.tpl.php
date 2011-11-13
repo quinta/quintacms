@@ -37,12 +37,6 @@
 
 		<?php $_CONTROL->lblLastModification->RenderWithName(); ?>
 
-		<?php $_CONTROL->lstPublicPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstUserPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstGroupPermissions->RenderWithName(); ?>
-
 		<?php $_CONTROL->lstType->RenderWithName(); ?>
 
 		<?php $_CONTROL->lstStatus->RenderWithName(); ?>

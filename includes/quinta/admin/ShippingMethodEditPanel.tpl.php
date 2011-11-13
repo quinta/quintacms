@@ -19,6 +19,8 @@
 
 		<?php $_CONTROL->txtDescription->RenderWithName(); ?>
 
+		<?php $_CONTROL->txtImageFilename->RenderWithName(); ?>
+
 		<?php $_CONTROL->chkActive->RenderWithName(); ?>
 
 		<?php $_CONTROL->chkIsInternational->RenderWithName(); ?>

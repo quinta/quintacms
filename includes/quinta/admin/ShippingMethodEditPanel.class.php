@@ -27,6 +27,7 @@
 		public $txtClassName;
 		public $txtTransitTime;
 		public $txtDescription;
+		public $txtImageFilename;
 		public $chkActive;
 		public $chkIsInternational;
 		public $chkTestMode;
@@ -67,6 +68,7 @@
 			$this->txtClassName = $this->mctShippingMethod->txtClassName_Create();
 			$this->txtTransitTime = $this->mctShippingMethod->txtTransitTime_Create();
 			$this->txtDescription = $this->mctShippingMethod->txtDescription_Create();
+			$this->txtImageFilename = $this->mctShippingMethod->txtImageFilename_Create();
 			$this->chkActive = $this->mctShippingMethod->chkActive_Create();
 			$this->chkIsInternational = $this->mctShippingMethod->chkIsInternational_Create();
 			$this->chkTestMode = $this->mctShippingMethod->chkTestMode_Create();

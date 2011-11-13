@@ -25,12 +25,6 @@
 
 		<?php $_CONTROL->chkHasFooter->RenderWithName(); ?>
 
-		<?php $_CONTROL->lstPublicPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstUserPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstGroupPermissions->RenderWithName(); ?>
-
 		<?php $_CONTROL->lstType->RenderWithName(); ?>
 
 		<?php $_CONTROL->lstDocType->RenderWithName(); ?>

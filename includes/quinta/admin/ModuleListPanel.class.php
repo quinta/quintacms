@@ -75,9 +75,6 @@
 			$this->dtgModules->MetaAddColumn('ShowDescription');
 			$this->dtgModules->MetaAddColumn(QQN::Module()->ContentBlock);
 			$this->dtgModules->MetaAddColumn(QQN::Module()->ParentModule);
-			$this->dtgModules->MetaAddTypeColumn('PublicPermissionsId', 'PermissionType');
-			$this->dtgModules->MetaAddTypeColumn('UserPermissionsId', 'PermissionType');
-			$this->dtgModules->MetaAddTypeColumn('GroupPermissionsId', 'PermissionType');
 
 			// Setup the Create New button
 			$this->btnCreateNew = new QButton($this);

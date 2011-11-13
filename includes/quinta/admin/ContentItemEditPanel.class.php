@@ -36,9 +36,6 @@
 		public $txtCopyrightNotice;
 		public $lblCreationDate;
 		public $lblLastModification;
-		public $lstPublicPermissions;
-		public $lstUserPermissions;
-		public $lstGroupPermissions;
 		public $lstType;
 		public $lstStatus;
 
@@ -89,9 +86,6 @@
 			$this->txtCopyrightNotice = $this->mctContentItem->txtCopyrightNotice_Create();
 			$this->lblCreationDate = $this->mctContentItem->lblCreationDate_Create();
 			$this->lblLastModification = $this->mctContentItem->lblLastModification_Create();
-			$this->lstPublicPermissions = $this->mctContentItem->lstPublicPermissions_Create();
-			$this->lstUserPermissions = $this->mctContentItem->lstUserPermissions_Create();
-			$this->lstGroupPermissions = $this->mctContentItem->lstGroupPermissions_Create();
 			$this->lstType = $this->mctContentItem->lstType_Create();
 			$this->lstStatus = $this->mctContentItem->lstStatus_Create();
 			$this->lstContentBlocks = $this->mctContentItem->lstContentBlocks_Create();

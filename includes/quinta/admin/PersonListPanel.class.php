@@ -72,8 +72,6 @@
 			$this->dtgPeople->MetaAddColumn('LastName');
 			$this->dtgPeople->MetaAddColumn('NameSuffix');
 			$this->dtgPeople->MetaAddColumn('NickName');
-			$this->dtgPeople->MetaAddColumn('EmailAddress');
-			$this->dtgPeople->MetaAddColumn('PhoneNumber');
 			$this->dtgPeople->MetaAddColumn('AvatarUri');
 			$this->dtgPeople->MetaAddColumn('CompanyName');
 			$this->dtgPeople->MetaAddColumn(QQN::Person()->OwnerPerson);

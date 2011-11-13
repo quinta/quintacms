@@ -23,9 +23,9 @@
 		{
 			$strClassName = substr($strFile, 0, $intPosition);
 			$strClassNameArray[$strClassName] = $strClassName . 'ListPanel';
-			require($strClassName . 'ListPanel.class.php');
+			require_once($strClassName . 'ListPanel.class.php');
 			if(file_exists('./' . $strClassName . 'EditPanel.class.php') )
-			require($strClassName . 'EditPanel.class.php');
+				require_once($strClassName . 'EditPanel.class.php');
 		}
 	}
 

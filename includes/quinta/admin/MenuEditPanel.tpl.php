@@ -17,13 +17,7 @@
 
 		<?php $_CONTROL->chkShowTitle->RenderWithName(); ?>
 
-		<?php $_CONTROL->txtMenuItemId->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstPublicPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstUserPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstGroupPermissions->RenderWithName(); ?>
+        <?php $_CONTROL->lstParentMenuItem->RenderWithName(); ?>
 
 		<?php $_CONTROL->lstStatus->RenderWithName(); ?>
 
@@ -31,7 +25,7 @@
 
 		<?php $_CONTROL->lstContentBlocks->RenderWithName(true, "Rows=7"); ?>
 
-		<?php $_CONTROL->lstMenuItemsAsItem->RenderWithName(true, "Rows=7"); ?>
+        <?php $_CONTROL->lstMenuItems->RenderWithName(true, "Rows=7"); ?>
 
 	</div>
 

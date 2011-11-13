@@ -30,9 +30,6 @@
 		public $chkHasLeftColumn;
 		public $chkHasRightColumn;
 		public $chkHasFooter;
-		public $lstPublicPermissions;
-		public $lstUserPermissions;
-		public $lstGroupPermissions;
 		public $lstType;
 		public $lstDocType;
 		public $lstStatus;
@@ -81,9 +78,6 @@
 			$this->chkHasLeftColumn = $this->mctPage->chkHasLeftColumn_Create();
 			$this->chkHasRightColumn = $this->mctPage->chkHasRightColumn_Create();
 			$this->chkHasFooter = $this->mctPage->chkHasFooter_Create();
-			$this->lstPublicPermissions = $this->mctPage->lstPublicPermissions_Create();
-			$this->lstUserPermissions = $this->mctPage->lstUserPermissions_Create();
-			$this->lstGroupPermissions = $this->mctPage->lstGroupPermissions_Create();
 			$this->lstType = $this->mctPage->lstType_Create();
 			$this->lstDocType = $this->mctPage->lstDocType_Create();
 			$this->lstStatus = $this->mctPage->lstStatus_Create();

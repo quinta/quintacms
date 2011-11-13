@@ -33,7 +33,7 @@
 
 		<?php $_CONTROL->lblCreationDate->RenderWithName(); ?>
 
-		<?php $_CONTROL->lblLastModificationDate->RenderWithName(); ?>
+		<?php $_CONTROL->lblLastModification->RenderWithName(); ?>
 
 	</div>
 

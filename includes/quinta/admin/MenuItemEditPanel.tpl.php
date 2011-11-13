@@ -21,12 +21,6 @@
 
 		<?php $_CONTROL->txtSortOrder->RenderWithName(); ?>
 
-		<?php $_CONTROL->lstPublicPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstUserPermissions->RenderWithName(); ?>
-
-		<?php $_CONTROL->lstGroupPermissions->RenderWithName(); ?>
-
 		<?php $_CONTROL->lstStatus->RenderWithName(); ?>
 
 		<?php $_CONTROL->lstType->RenderWithName(); ?>

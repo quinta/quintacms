@@ -72,6 +72,7 @@
 			$this->dtgShippingMethods->MetaAddColumn('ClassName');
 			$this->dtgShippingMethods->MetaAddColumn('TransitTime');
 			$this->dtgShippingMethods->MetaAddColumn('Description');
+			$this->dtgShippingMethods->MetaAddColumn('ImageFilename');
 			$this->dtgShippingMethods->MetaAddColumn('Active');
 			$this->dtgShippingMethods->MetaAddColumn('IsInternational');
 			$this->dtgShippingMethods->MetaAddColumn('TestMode');

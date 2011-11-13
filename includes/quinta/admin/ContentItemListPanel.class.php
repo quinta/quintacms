@@ -81,9 +81,6 @@
 //			$this->dtgContentItems->MetaAddColumn('CopyrightNotice');
 			$this->dtgContentItems->MetaAddColumn('CreationDate');
 			$this->dtgContentItems->MetaAddColumn('LastModification');
-/*			$this->dtgContentItems->MetaAddTypeColumn('PublicPermissionsId', 'PermissionType');
-			$this->dtgContentItems->MetaAddTypeColumn('UserPermissionsId', 'PermissionType');
-			$this->dtgContentItems->MetaAddTypeColumn('GroupPermissionsId', 'PermissionType');*/
 			$this->dtgContentItems->MetaAddTypeColumn('TypeId', 'ContentType');
 			$this->dtgContentItems->MetaAddTypeColumn('StatusId', 'ContentStatusType');
 

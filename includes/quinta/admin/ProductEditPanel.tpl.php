@@ -47,12 +47,11 @@
 
 		<?php $_CONTROL->txtViewCount->RenderWithName(); ?>
 
-		<?php $_CONTROL->lstUserPermissions->RenderWithName(); ?>
+		<?php $_CONTROL->lstProductCategories->RenderWithName(true, "Rows=7"); ?>
 
-		<?php $_CONTROL->lstPublicPermissions->RenderWithName(); ?>
+		<?php $_CONTROL->lstParentProductsAsRelated->RenderWithName(true, "Rows=7"); ?>
 
-		<?php $_CONTROL->lstGroupPermissions->RenderWithName(); ?>
-
+		<?php $_CONTROL->lstProductsAsRelated->RenderWithName(true, "Rows=7"); ?>
 
 	</div>
 

@@ -71,10 +71,7 @@
 			$this->dtgMenus->MetaAddColumn('CssClass');
 			$this->dtgMenus->MetaAddColumn('SortOrder');
 			$this->dtgMenus->MetaAddColumn('ShowTitle');
-			$this->dtgMenus->MetaAddColumn('MenuItemId');
-			$this->dtgMenus->MetaAddTypeColumn('PublicPermissionsId', 'PermissionType');
-			$this->dtgMenus->MetaAddTypeColumn('UserPermissionsId', 'PermissionType');
-			$this->dtgMenus->MetaAddTypeColumn('GroupPermissionsId', 'PermissionType');
+			$this->dtgMenus->MetaAddColumn(QQN::Menu()->ParentMenuItem);
 			$this->dtgMenus->MetaAddTypeColumn('StatusId', 'MenuStatusType');
 			$this->dtgMenus->MetaAddTypeColumn('TypeId', 'MenuType');
 
