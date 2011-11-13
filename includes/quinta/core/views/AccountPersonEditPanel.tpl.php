@@ -13,9 +13,10 @@
 
 		<?php $_CONTROL->txtNickName->RenderWithName(); ?>
 
-		<?php $_CONTROL->txtEmailAddress->RenderWithName(); ?>
-
-		<?php $_CONTROL->txtPhoneNumber->RenderWithName(); ?>
+		<?php 
+//		$_CONTROL->txtEmailAddress->RenderWithName(); 
+//		$_CONTROL->txtPhoneNumber->RenderWithName(); 
+		?>
 
 		<?php
 		//$_CONTROL->txtAvatarUri->RenderWithName();

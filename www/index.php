@@ -5,7 +5,7 @@
   * Note: This assumes that this file and Quinta.class.php are in the same directory - adjust as needed.
   * Note also that (at least under linux ..) this works even if a symlink is what is actually accessed.
  */
-	require(dirname(__FILE__) . '../includes/quinta/Quinta.class.php');
+	require(dirname(__FILE__) . '/../includes/quinta/Quinta.class.php');
 
 // if you want to restrict access uncomment this:
 //    Quinta::CheckRemoteAdmin();
@@ -58,11 +58,11 @@
 		* NOTE: any account always has a single shopping cart, it will retain any items in it
 		* until they either check out or remove them.
 		* @var ShoppingCart objShoppingCart - self explanatory ..
-		*/        
+		*/
 		public static $objShoppingCart;
 		/**
 		* @var Account objAccount - the currently logged in account, null if not logged in
-		*/        
+		*/
 		public static $objAccount;
 		/**
 		* @var string strPageRequest - the name of the current page, Page object is loaded from the database
@@ -114,7 +114,7 @@
 							   );
 
 		/**
-		* @var string defaultStyleSheet - default CSS stylesheet 
+		* @var string defaultStyleSheet - default CSS stylesheet
 		*/
 		protected $defaultStyleSheet = 'quinta.css';
 		/**
@@ -132,7 +132,7 @@
 		*@var array ActiveModules - an array of references to modules which have been loaded.
 		*/
 		public $ActiveModules;
-		
+
 		//experimental thinking - ignore at will ..
 		protected function __construct(){
 			parent::__construct();
@@ -151,9 +151,9 @@
 			array_shift($aryRequest);
 			//store page name
 			self::$strPageRequest = array_shift($aryRequest);
-			//store extra parameters 
+			//store extra parameters
 			self::$strPageParameters = implode( '/', $aryRequest);
-			
+
 			//Then check / set login status
 			if( ! isset($_SESSION['AccountLogin']) ){
 				//timed out .. redirect home (avoid qcodo exception)
@@ -162,7 +162,7 @@
 					Quinta::Redirect(__QUINTA_SUBDIRECTORY__ . '/index.php/Home');
 				}
 				self::$objAccount = null;
-			}else{    
+			}else{
 				self::$objAccount = unserialize( $_SESSION['AccountLogin'] );
 				if( ! self::$objAccount instanceof Account ){
 					unset($_SESSION['AccountLogin']);
@@ -186,20 +186,20 @@
 			}
 			// turn off AJAX for known problem browsers ..
 			if( Quinta::IsBrowser( QBrowserType::InternetExplorer_6_0 )
-				|| Quinta::IsBrowser( QBrowserType::Safari )
-				|| Quinta::IsBrowser( QBrowserType::Opera ))
+				|| Quinta::IsBrowser( QBrowserType::Safari ))
+//				|| Quinta::IsBrowser( QBrowserType::Opera ))
 				self::$blnAjaxOk = false;
 			else
 				self::$blnAjaxOk = true;
 		}
 		protected function Form_Create(){
 			//redirect to include index.php and start out with our url scheme
-			
+
 			if( empty(Quinta::$ScriptName ) )
 				Quinta::Redirect(__QUINTA_SUBDIRECTORY__ . '/index.php/Home');
 			elseif( empty(self::$strPageRequest) )
 				self::$strPageRequest = "Home";
-			
+
 			// Now get the Page row from the database ..
 			$this->objPage = Page::LoadByName(self::$strPageRequest);
 			// @todo  implement 404 page not found .. for now, we just go home.
@@ -212,7 +212,10 @@
 			   // $this->loadModules();
 				$this->objPageController = new PageController( $this, $this->objPage );
 				$this->aryStyleSheets = StyleSheet::LoadArrayByPage( $this->objPage->Id );
-				$this->strPreferedStyleSheet = $this->aryStyleSheets[0];
+				if(!empty($this->aryStyleSheets))
+					$this->strPreferedStyleSheet = $this->aryStyleSheets[0];
+				else
+					$this->aryStyleSheets[0] = $this->defaultStyleSheet;
 			}
 			else
 				$this->strPreferedStyleSheet = $this->defaultStyleSheet;
@@ -230,7 +233,7 @@
 				}
 
 			$this->aryJavaScripts = JavaScript::LoadArrayByPage( $this->objPage->Id );
-			
+
 			if(is_array($this->aryJavaScripts) )
 				foreach($this->aryJavaScripts as $objJavaScript){
 					foreach( $this->aryJavaScriptDirectories as $basedir ){
@@ -243,13 +246,13 @@
 				}
 			$this->objDefaultWaitIcon = new QWaitIcon($this);
 		}
-			  
+
 		/**
 		 * This Form_Validate event handler allows you to specify any custom Form Validation rules.
 		 * It will also Blink() on all invalid controls, as well as Focus() on the top-most invalid control.
 		 * NOTE: Currently disabled to avoid conflicts with validation in modules
-		 * @todo work out what to do about this, since the whole CMS is essentially one form we 
-		 * need a more coherant system for event and signal handling ..      
+		 * @todo work out what to do about this, since the whole CMS is essentially one form we
+		 * need a more coherant system for event and signal handling ..
 		 */
 		protected function Form_Validate(){
 			// By default, we report that Custom Validations passed
@@ -269,19 +272,19 @@
 */
 			return $blnToReturn;
 		}
-		
+
 		protected function handleUrl(){
 			$aryRequest = explode('/', self::$strPageRequest);
 			self::$strPageRequest = array_shift($aryRequest);
 			self::$strPageParameters = implode( '/', $aryRequest);
 		}
-		
+
 		/**
 		* This function returns a reference to an active module if it is in the list. Otherwise, it returns null
 		* You must pass the name of the module to return.
 		* WARNING: BROKEN - do not use.
 		* @todo - figure out how to make this work. (Note: i suspect a clone in QForm may be breaking this ..)
-		* 
+		*
 		*@param string strModuleName
 		* @return object SomeModule or null
 		*/
@@ -297,7 +300,7 @@
 		public function AddActiveModule($objModule){
 			$this->ActiveModules[] = $objModule;
 		}
-		
+
 		/**
 		* Loads any modules associated with content blocks on the requested page.
 		* Note that the order of loading is local, then contrib, then core. This only runs
@@ -322,7 +325,7 @@
 				}
 			}
 		}
-		
+
 		//Note - these are unused currently, but left as a reminder for possible future
 		// architectural change - essentially we could make almost anything a panel
 		// (anywhere?) with ajax/server calls for display management...
@@ -338,7 +341,7 @@
 					$objPanel->Visible = true;
 			}
 		}
-		
+
 		public function __get($strName){
 			switch ($strName){
 				case 'PageTitle':

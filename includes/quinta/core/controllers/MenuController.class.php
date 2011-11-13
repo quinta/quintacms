@@ -1,7 +1,7 @@
 <?php
 
 if(!defined('QUINTACMS') ) die("No quinta.");
-	
+
 /**
 	* This is the Controller class for display functionality of the Menu class.
 	*  It provides a div based area for content with hierarchy, css id and class
@@ -10,7 +10,7 @@ if(!defined('QUINTACMS') ) die("No quinta.");
 	* and all associated Items.
 	*  These associations may configured via the QuintaCMS Dashboard interface and
 	* will then automatically be reflected in the associated ContentBlockController display.
-	*    
+	*
 	*@author Erik Winn <sidewalksoftware@gmail.com>
 	*
 	*@version 0.1
@@ -19,26 +19,26 @@ if(!defined('QUINTACMS') ) die("No quinta.");
 	* @subpackage Views
 	*
 	*/
-	 
+
 	class MenuController extends QPanel{
 		// Local instances of the Parent object, Menu and MenuItems
 		protected $objParentObject;
 		protected $objMenu;
 		public $aryMenuItemControllers;
-		
+
 		protected $strTitle;
 		protected $intLevel = 0;
 
 		// This Menu block's CSS id
 		protected $strCssId;
 		protected $strCssclass;
-		
+
 		public function __construct($objParentObject, Menu $objMenu/*, $strCssId*/){
 			//Parent must always be a ContentBlock or a MenuController
 			$this->objParentObject = $objParentObject;
 			$this->strCssId = preg_replace('/\s/', '',$objMenu->Name);
 //            $this->strCssId = $strCssId;
-			
+
 			try {
 				parent::__construct($this->objParentObject, $this->strCssId);
 			} catch (QCallerException $objExc) {
@@ -49,30 +49,30 @@ if(!defined('QUINTACMS') ) die("No quinta.");
 				throw new QCallerException(sprintf("Menu %s created without a MenuItem!", $strCssId) );
 		   else
 				$this->objMenu =  $objMenu;
-						
+
 			$this->strTitle = $this->objMenu->Title;
 			if($objMenu->CssClass)
 				$this->AddCssClass($objMenu->CssClass);
-				
+
 			$this->AddCssClass($objMenu->Type);
-			
+
 			$this->Template = __QUINTA_CORE_VIEWS__ . '/MenuView.tpl.php';
 
-			$aryMenuItems = $this->objMenu->GetMenuItemAsItemArray( QQ::Clause( 
+			$aryMenuItems = $this->objMenu->GetMenuItemArray( QQ::Clause(
 														QQ::OrderBy(QQN::MenuItem()->SortOrder)
 																 ));
 			foreach($aryMenuItems as $objMenuItem ){
 				$objMenuItemController = new MenuItemController( $this, $objMenuItem );
-				
+
 				//Note: this will increment
 				$objMenuItemController->Level = $this->Level + 1;
-				
+
 				$this->aryMenuItemControllers[] = $objMenuItemController;
 			}
 
 /*            if(!$this->mctMenu || !$this->objMenu  )
 				$this->Template = 'BasicMenu.tpl.php';
-			else    
+			else
 				switch( $this->objMenu->Type )
 				{
 					case 'Menu':
@@ -105,9 +105,9 @@ if(!defined('QUINTACMS') ) die("No quinta.");
 					default:
 						$this->Template = 'BasicMenu.tpl.php';
 				}*/
-				
+
 		}
-		
+
 		public function __get($strName){
 			switch ($strName){
 				case 'Level':
@@ -131,7 +131,7 @@ if(!defined('QUINTACMS') ) die("No quinta.");
 					}
 			}
 		}
-		
+
 		public function __set($strName, $mixValue){
 			switch ($strName){
 				case 'Level':

@@ -2,7 +2,7 @@
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php _p(QApplication::$EncodingType); ?>" />
 <title>Quinta CMS Installation</title>
-<link rel="stylesheet" type="text/css" href="core/assets/css/quinta.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/quinta.css">
 </head><body>
 <center>
 <div style="width:600px; color:white; font-weight:bold">

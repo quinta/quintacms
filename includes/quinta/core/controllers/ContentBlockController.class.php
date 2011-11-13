@@ -117,7 +117,8 @@ if(!defined('QUINTACMS') ) die("No quinta.");
 			// Setup the Template
 			$this->Template = __QUINTA_CORE_VIEWS__ . '/ContentBlockView.tpl.php';
 
-			foreach ( $this->objContentBlock->GetChildContentBlockArray(
+//			foreach ( $this->objContentBlock->GetChildContentBlockArray(
+			foreach ( ContentBlock::LoadArrayByParentContentBlockId($this->objContentBlock->Id,
 													QQ::Clause (QQ::OrderBy(QQN::ContentBlock()->SortOrder) )
 																) as $childContentBlock )
 			{

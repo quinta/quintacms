@@ -1,6 +1,6 @@
 <?php
 	// Include to load  Quinta and Qcodo
-	require('../core/Quinta.class.php');
+	require('../Quinta.class.php');
 
 	// Security check for ALLOW_REMOTE_ADMIN
 	// To allow access REGARDLESS of ALLOW_REMOTE_ADMIN, simply remove the line below
@@ -24,7 +24,7 @@
 			$strClassName = substr($strFile, 0, $intPosition);
 			$strClassNameArray[$strClassName] = $strClassName . 'ListPanel';
 			require($strClassName . 'ListPanel.class.php');
-			if(file_exists('./' . $strClassName . 'EditPanel.class.php') )         
+			if(file_exists('./' . $strClassName . 'EditPanel.class.php') )
 			require($strClassName . 'EditPanel.class.php');
 		}
 	}
@@ -65,8 +65,8 @@
 				$pnlClassName->ActionParameter = $strClassName;
 				$pnlClassName->AddAction(New QClickEvent(), new QAjaxAction('pnlClassNames_Change'));
 
-			}         
-			
+			}
+
 			$this->objDefaultWaitIcon = new QWaitIcon($this);
 		}
 
@@ -109,7 +109,7 @@
 				// We've selected a Class Name
 				$objNewPanel = new $strClassName($this->pnlList, 'SetEditPane', 'CloseEditPane');
 				$this->pnlTitle->Text = $strMenuLabel =  substr( $strParameter, 0 , strpos( $strParameter, "ListPanel" ) );
-				$this->pnlTitle->Text .= ' List';            
+				$this->pnlTitle->Text .= ' List';
 			} else {
 				$this->pnlTitle->Text = 'AJAX Dashboard';
 			}
@@ -119,10 +119,10 @@
 		{
 			$this->pnlEdit->RemoveChildControls(true);
 			$this->pnlEdit->Visible = false;
-			
+
 			$this->pnlList->RemoveChildControls(true);
 			$objPanel->SetParentControl($this->pnlList);
-			$this->pnlList->Visible = true;         
+			$this->pnlList->Visible = true;
 		}
 
 		public function CloseEditPane($blnUpdatesMade) {

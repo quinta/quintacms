@@ -7,13 +7,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php _p(QApplication::$EncodingType); ?>" />
 <?php
 	if (isset($strPageTitle))
-		print "<title> $strPageTitle </title>";       
-	$stylesheet = __SUBDIRECTORY__ . "/core/assets/css/quintaadmin.css";
+		print "<title> $strPageTitle </title>";
+	$stylesheet = __SUBDIRECTORY__ . "/assets/css/quintaadmin.css";
 	if (file_exists( __DOCROOT__ . $stylesheet) )
 		print '<link rel="stylesheet" type="text/css" href="' .  __VIRTUAL_DIRECTORY__  . $stylesheet . '">';
 	else
 		print "Stylesheet missing - flying naked ..<br />\n";
-	 
+
 	 $strProtocol = Quinta::$IsSsl ? 'https://' : 'http://';
 	 $strTinyMceUri = $strProtocol . Quinta::$ServerName . __QUINTA_CORE_JS__ . '/tiny_mce/tiny_mce.js';
 ?>

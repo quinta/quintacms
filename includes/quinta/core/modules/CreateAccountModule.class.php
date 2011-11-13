@@ -67,8 +67,8 @@ define("CREATEACCOUNTMODULE.CLASS.PHP",1);
 		public $lstCountry;
 		public $txtPostalCode;
 		public $lstAddressType;
-		public $txtEmailAddress;
-		public $txtPhoneNumber;
+//		public $txtEmailAddress;
+//		public $txtPhoneNumber;
 
 		// Action Button Controls
 		public $btnSave;
@@ -118,11 +118,11 @@ define("CREATEACCOUNTMODULE.CLASS.PHP",1);
 			$this->txtNameSuffix = $this->mctPerson->txtNameSuffix_Create();
 			$this->txtNameSuffix->Name = Quinta::Translate('Jr., Sr., PhD, etc. ');
 			$this->txtCompanyName = $this->mctPerson->txtCompanyName_Create();
-			$this->txtEmailAddress = $this->mctPerson->txtEmailAddress_Create();
-			$this->txtEmailAddress->Required = true;
-			$this->txtEmailAddress->Name =Quinta::Translate('Email Address');
-			$this->txtPhoneNumber = $this->mctPerson->txtPhoneNumber_Create();
-			$this->txtPhoneNumber->Name =Quinta::Translate('Phone Number');
+//			$this->txtEmailAddress = $this->mctPerson->txtEmailAddress_Create();
+//			$this->txtEmailAddress->Required = true;
+//			$this->txtEmailAddress->Name =Quinta::Translate('Email Address');
+//			$this->txtPhoneNumber = $this->mctPerson->txtPhoneNumber_Create();
+//			$this->txtPhoneNumber->Name =Quinta::Translate('Phone Number');
 			// Address MetaControl methods
 			$this->txtTitle = $this->mctAddress->txtTitle_Create();
 			$this->txtTitle->Name = 'Address Title: ';
@@ -214,11 +214,6 @@ define("CREATEACCOUNTMODULE.CLASS.PHP",1);
 			$this->objAccount->UpdateLoginState();
 			$_SESSION["AccountLogin"] = serialize($this->objAccount);
 			
-			if(Quinta::IsBrowser( QBrowserType::Opera )){
-				ob_clean();
-				header('Location: http://www.batchpcb.com/index.php/AccountHome/PcbDesign');
-				exit;
-			}
 			Quinta::Redirect(__QUINTA_SUBDIRECTORY__ . LOGIN_REDIRECT );
 		}
 

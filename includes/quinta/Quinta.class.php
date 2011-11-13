@@ -14,7 +14,7 @@ define('QUINTA.CLASS.PHP',1);
 	 * QApplication.class.php ..
 	 */
 	require(__QCODO_ROOT__  . '/includes/prepend.inc.php');
-	
+
 	/**
 	 * The Quinta class is an abstract class that statically provides global
 	 * information and global utilities for the entire CMS application. Since
@@ -51,15 +51,15 @@ define('QUINTA.CLASS.PHP',1);
 		*  @var array QuintaClasses - a map array of classes to filenames used by the autoloader.
 		*/
 		public static $QuintaClasses = array();
-		
+
 		/**
 		 *  @var array QuintaIncludePaths - a map array of paths to be searched by the autoloader.
 		 */
 		public static $QuintaIncludePaths = array(
-			__QUINTA_LOCAL_CONTROLLERS__,
+/*			__QUINTA_LOCAL_CONTROLLERS__,
 			__QUINTA_LOCAL_MODULES__,
 			__QUINTA_LOCAL_MODELS__,
-			__QUINTA_LOCAL_METACONTROLS__,
+			__QUINTA_LOCAL_METACONTROLS__,*/
 			__QUINTA_CONTRIB_CONTROLLERS__,
 			__QUINTA_CONTRIB_MODULES__,
 			__QUINTA_CONTRIB_MODELS__,
@@ -89,10 +89,10 @@ define('QUINTA.CLASS.PHP',1);
 			$strSsl =  array_key_exists( 'HTTPS', $_SERVER) ? $_SERVER['HTTPS'] : '';
 			if(!empty($strSsl))
 				Quinta::$IsSsl = true;
-							
+
 			///@todo make me international ..
 			setlocale(LC_MONETARY, 'en_US');
-			
+
 			//load an array of filenames for quick autoloading
 			/// @todo change this to just look on demand ..see Autoload
 			foreach( self::$QuintaIncludePaths as $strPath){
@@ -128,7 +128,7 @@ define('QUINTA.CLASS.PHP',1);
 			foreach($aryQcodoPrefixes as $strPrefix)
 				if( false !== strpos( $strClassName, $strPrefix ) )
 					$strClassName = substr( $strClassName, strlen( $strPrefix ) );
-			
+
 			// first check Quinta directories ..
 			if(array_key_exists(strtolower($strClassName), Quinta::$QuintaClasses) )
 			{
@@ -158,12 +158,12 @@ define('QUINTA.CLASS.PHP',1);
 		{
 		   //ob_clean();
 		   $strProtocol = '';
-			
+
 			if($blnUseSsl)
 				$strProtocol =  'https://';
-			else    
+			else
 				$strProtocol =  'http://';
-				
+
 			if( false !== strpos( $strLocation, 'http://' ) || false !== strpos( $strLocation, 'https://' ) ){
 
 				/* candidate:
@@ -181,7 +181,8 @@ define('QUINTA.CLASS.PHP',1);
 				header('Location: ' . $strLocation);
 				if( Quinta::IsBrowser(QBrowserType::InternetExplorer ) )
 					header('Connection: close');
-			}elseif( Quinta::IsBrowser( QBrowserType::Opera) || Quinta::IsBrowser( QBrowserType::Safari) ){
+//			}elseif( Quinta::IsBrowser( QBrowserType::Opera) || Quinta::IsBrowser( QBrowserType::Safari) ){
+			}elseif( Quinta::IsBrowser( QBrowserType::Safari) ){
 				//these two do not support document.location redirects ..??
 				ob_clean();
 //                header('Location: ' . $strProtocol  . Quinta::$ServerName . $strLocation);
@@ -190,7 +191,7 @@ define('QUINTA.CLASS.PHP',1);
 				parent::Redirect($strLocation);
 			exit;
 		}
-		
+
 		/**
 		* Quinta access control
 		* Note: this is only a sketch of an idea, in the event of a real access control you will be notified ..
@@ -224,11 +225,11 @@ define('QUINTA.CLASS.PHP',1);
 					$blnAllow = true;
 			return $blnAllow;
 		}
-		
+
 	}//end class
 
 	//now initialize Quinta data
 	Quinta::Init();
 }//end define
-   
+
 ?>

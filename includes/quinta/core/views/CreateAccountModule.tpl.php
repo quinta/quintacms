@@ -5,7 +5,6 @@
 		 <tr><td><?php $_CONTROL->txtPassword->RenderWithName(); ?></td></tr>
 		 <tr><td><?php $_CONTROL->txtPassword2->RenderWithName(); ?></td></tr>
 <!--    Person fields   -->
-		 <tr><td><?php $_CONTROL->txtEmailAddress->RenderWithName(); ?></td></tr>
 		 <tr><td><?php $_CONTROL->txtNamePrefix->RenderWithName(); ?></td></tr>
 		 <tr><td><?php $_CONTROL->txtFirstName->RenderWithName(); ?></td></tr>
 		 <tr><td><?php $_CONTROL->txtMiddleName->RenderWithName(); ?></td></tr>
@@ -22,7 +21,6 @@
 		 <tr><td><?php $_CONTROL->lstCountry->RenderWithName(); ?></td></tr>
 		 <tr><td><?php $_CONTROL->txtPostalCode->RenderWithName(); ?></td></tr>
 <!--    Person (phone) field   -->
-		 <tr><td><?php $_CONTROL->txtPhoneNumber->RenderWithName(); ?></td></tr>
 	</table>
 
 	</div>

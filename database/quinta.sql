@@ -40,16 +40,16 @@ INSERT INTO permission_type (name) VALUES ('Create');
 
 /***********************************************************************
     Notes on the person table and its associate dependant tables
-    
+
     1. INSERT INTO person(is_virtual) VALUES(false);
     2. INSERT INTO account(username,password,now(),true,1,1,person.id)
     3. INSERT INTO address, using person.id FK
-                
+
     So, we create a row in the person table using data in other tables.
    This means we need to insert the person first, get the insert id, then insert the others
    with the id and then update the person row with the ids from the others to maintain
    referential integrity.
-        
+
      Case 2 illustrates the purpose of the design - we want to allow members to send gifts to friends
     periodically. So, they can create a new "virtual" person with name and address and store it
     making it available as an selection when they choose a shipping address during a checkout.
@@ -58,7 +58,7 @@ INSERT INTO permission_type (name) VALUES ('Create');
     and address within normal forms (without duplication). Any additional name and address
     must be other than type primary and type primary must exist for a User in order for them
     to make a purchase.
-    
+
 
    Use case - Member Registration:
     * Chooses username and login, optional address info (this would define them as a customer) ..
@@ -67,7 +67,7 @@ INSERT INTO permission_type (name) VALUES ('Create');
         3. if address info, create address object FK person_id gets person.id, type is set to primary
             else - error.
         4. repeat for phone, email, shipping, billing - all optional
-        
+
     Use case - Member addition (ie, adds a gift address/person ):
         1. User fills in fields - collect and perform inserts as above
         2. Set address.person_id to new person.id
@@ -77,7 +77,7 @@ INSERT INTO permission_type (name) VALUES ('Create');
         1. If no account exists, steps 1 - 2 of  Use Case 1.
         2. Else, (or after 1.) proceed as in Use Case 2  assigning FK id columns to an existing
         or newly created row in person (eg. address.person_id = person.id)
-        
+
 ******************************************************************************/
 
 CREATE TABLE `person` (
@@ -233,10 +233,10 @@ CREATE TABLE `address` (
   `street_2` VARCHAR(256) ,
   `suburb` VARCHAR(256) ,
   `city` VARCHAR(256) ,
-  `county` VARCHAR(256) , -- text version of zone/district 
+  `county` VARCHAR(256) , -- text version of zone/district
   `zone_id` SMALLINT UNSIGNED NOT NULL DEFAULT 13,  -- 'state, province or district
   `country_id` SMALLINT UNSIGNED NOT NULL DEFAULT 223,
-  `postal_code` VARCHAR(32), -- get a table for this 
+  `postal_code` VARCHAR(32), -- get a table for this
   `is_current` BOOL NOT NULL DEFAULT TRUE,
   `type_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   `creation_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -293,7 +293,7 @@ CREATE TABLE `product` (
   `name` VARCHAR(128) NOT NULL,
   `model` VARCHAR(128) NOT NULL,
   `short_description` VARCHAR(128) ,
-  `long_description` TEXT, 
+  `long_description` TEXT,
   `msrp` DECIMAL(12,2) UNSIGNED,
   `wholesale_price` DECIMAL(12,2) UNSIGNED,
   `retail_price` DECIMAL(12,2) UNSIGNED,
@@ -586,7 +586,7 @@ CREATE TABLE `authorize_net_transaction` (
     `transaction_id` VARCHAR(128),
     `transaction_type` VARCHAR(128),
     `amount` DECIMAL(12,2),
-    `avs_response_code` VARCHAR(8),    
+    `avs_response_code` VARCHAR(8),
     `ccv_response_code` VARCHAR(8),
     `cav_response_code` VARCHAR(8),
     CONSTRAINT pk_authnet_transaction PRIMARY KEY (`id`),
@@ -623,10 +623,10 @@ CREATE TABLE `order_address` (
   `street_2` VARCHAR(256) ,
   `suburb` VARCHAR(256) ,
   `city` VARCHAR(256) ,
-  `county` VARCHAR(256) , -- text version of zone/district 
+  `county` VARCHAR(256) , -- text version of zone/district
   `zone_id` SMALLINT UNSIGNED NOT NULL DEFAULT 13,  -- 'state, province or district
   `country_id` SMALLINT UNSIGNED NOT NULL DEFAULT 223,
-  `postal_code` VARCHAR(32), -- get a table for this 
+  `postal_code` VARCHAR(32), -- get a table for this
   `type_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   `creation_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_modification` TIMESTAMP,
@@ -741,7 +741,7 @@ CREATE TABLE `content_block` (
   `show_description` BOOL NOT NULL DEFAULT FALSE,
   `collapsable` BOOL NOT NULL DEFAULT FALSE , -- optionally visible text, eg. on list page
   `sort_order` TINYINT UNSIGNED NOT NULL DEFAULT 0, -- ie, first or top in ul
-  `parent_content_block_id` MEDIUMINT UNSIGNED, 
+  `parent_content_block_id` MEDIUMINT UNSIGNED,
   `location_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   CONSTRAINT pk_content_block PRIMARY KEY (`id`),
   INDEX idx_content_block_parent (`parent_content_block_id`),
@@ -802,7 +802,7 @@ INSERT INTO content_status_type (name) VALUES ('Published');
 INSERT INTO content_status_type (name) VALUES ('Unpublished');
 INSERT INTO content_status_type (name) VALUES ('Draft');
 INSERT INTO content_status_type (name) VALUES ('Internal');
- 
+
  -- eg. the home page center column, or "about us" ..
 INSERT INTO content_type (name) VALUES ('PageBody');
  -- a news article, faq, blog - something likely listed in a pagebody with teasers ..
@@ -976,7 +976,7 @@ CREATE TABLE `page` (
   `creation_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_modification` TIMESTAMP,
   `name` VARCHAR(128) , -- human reference
-  `title` VARCHAR(256) , 
+  `title` VARCHAR(256) ,
   `uri` VARCHAR(256) DEFAULT 'index.php',
   `has_header` BOOL NOT NULL DEFAULT TRUE,
   `has_left_column` BOOL NOT NULL DEFAULT TRUE,
@@ -1067,20 +1067,20 @@ CREATE TABLE `menu` (
   `id` SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(64) NOT NULL , -- human reference
   `title` VARCHAR(32) , -- visible text
-  `css_class` VARCHAR(32) , 
+  `css_class` VARCHAR(32) ,
   `sort_order` TINYINT UNSIGNED DEFAULT 0, -- ie, first or top in ul
   `show_title` BOOL DEFAULT TRUE,
-  `menu_item_id` MEDIUMINT UNSIGNED DEFAULT 0, -- ie, this is a submenu within a menu_item
+  `parent_menu_item_id` MEDIUMINT UNSIGNED DEFAULT 0, -- ie, this is a submenu within a menu_item
   `status_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   `type_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   CONSTRAINT pk_menu PRIMARY KEY (`id`),
-  INDEX idx_menu_item (`menu_item_id`),
+  INDEX idx_menu_item (`parent_menu_item_id`),
   INDEX idx_menu_type (`type_id`),
   INDEX idx_menu_status (`status_id`),
   UNIQUE KEY idx_menu_name (`name`),
   FOREIGN KEY (`status_id`) REFERENCES `menu_status_type`(`id`),
   FOREIGN KEY (`type_id`) REFERENCES `menu_type`(`id`),
-  FOREIGN KEY (`menu_item_id`) REFERENCES `menu_item`(`id`)
+  FOREIGN KEY (`parent_menu_item_id`) REFERENCES `menu_item`(`id`)
 )
 ENGINE = InnoDB
 CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -1109,7 +1109,7 @@ INSERT INTO order_item_status_type (name) VALUES ('Internal');
 CREATE TABLE `order_item` (
   `order_id` BIGINT UNSIGNED NOT NULL,
   `product_id` BIGINT UNSIGNED NOT NULL,
-  `quantity` MEDIUMINT UNSIGNED NOT NULL DEFAULT 1, 
+  `quantity` MEDIUMINT UNSIGNED NOT NULL DEFAULT 1,
   `status_id` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   CONSTRAINT pk_order_product PRIMARY KEY (`product_id`,`order_id`),
   INDEX idx_order_item_order (`order_id`),
@@ -1754,6 +1754,6 @@ CREATE IF NOT EXISTS VIEW order_totals AS (
         LEFT JOIN order o ON op.order_id = o.order_id
         GROUP BY o.order_id
         GROUP BY p.id
-        
+
 );
 */

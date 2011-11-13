@@ -48,7 +48,7 @@ define("ACCOUNTORDERMODULE.CLASS.PHP",1);
 				$this->objOrderItemView = new AccountOrderViewPanel($this->pnlItemView, $this, 'CloseItemPanel', $this->intOrderId);
 				$this->pnlItemView->Visible = true;
 			}else{
-				$this->objOrderListView = new AccountOrderListPanel($this->pnlListView, $this, 'ShowItemPanel', 'CloseItemPanel', $this->Account->Id);
+				$this->objOrderListView = new AccountOrderListPanel($this->pnlListView, $this, 'ShowItemPanel', 'CloseItemPanel');
 				$this->pnlListView->Visible = true;
 			}
 		}
@@ -56,7 +56,7 @@ define("ACCOUNTORDERMODULE.CLASS.PHP",1);
 		 //Overrides the parent to ensure that the list view is populated
 		public function CloseItemPanel($blnUpdatesMade){
 			if(!$this->objOrderListView)
-				$this->objOrderListView = new AccountOrderListPanel( $this->pnlListView, $this, 'ShowItemPanel', 'CloseItemPanel', $this->Account->Id );
+				$this->objOrderListView = new AccountOrderListPanel( $this->pnlListView, $this, 'ShowItemPanel', 'CloseItemPanel');
 			parent::CloseItemPanel($blnUpdatesMade);            
 		}
 		

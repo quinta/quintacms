@@ -1,74 +1,78 @@
 <?php
-if(!defined('QUINTACMS') ) die("No quinta.");
+
+if (!defined('QUINTACMS'))
+	die("No quinta.");
 
 if (!defined("ACCOUNTADDRESSLISTPANEL.CLASS.PHP")) {
-define("ACCOUNTADDRESSLISTPANEL.CLASS.PHP",1);
+	define("ACCOUNTADDRESSLISTPANEL.CLASS.PHP", 1);
 
-/**
-* This class provides a panel in which to list addresses from within a user account.
-* Each address item contains an "Edit" link with which to access a specific address.
-* Additionally, this class creates the individual AddressEditPanel for editting as well
-* as another panel (PersonEditPanel) for changing or adding Persons. The Person
-* can be associated with the Address via a drop down list of persons.
-*
-*@version 0.1
-*
-* @package Quinta
-* @subpackage Classes
-*
-*/
+	/**
+	 * This class provides a panel in which to list addresses from within a user account.
+	 * Each address item contains an "Edit" link with which to access a specific address.
+	 * Additionally, this class creates the individual AddressEditPanel for editting as well
+	 * as another panel (PersonEditPanel) for changing or adding Persons. The Person
+	 * can be associated with the Address via a drop down list of persons.
+	 *
+	 * @version 0.1
+	 *
+	 * @package Quinta
+	 * @subpackage Classes
+	 *
+	 */
+	class AccountAddressListPanel extends QPanel {
 
-class AccountAddressListPanel extends QPanel{
 		/**
-		*@var array aryAddresses - an array of Addresses belonging to the Account
-		*/
+		 * @var array aryAddresses - an array of Addresses belonging to the Account
+		 */
 		protected $aryAddresses;
+
 		/**
-		*@var array aryPersons - an array of Persons belonging to the Person of this Account
-		*/
+		 * @var array aryPersons - an array of Persons belonging to the Person of this Account
+		 */
 		protected $aryPersons;
 
 		/**
-		*@var ContentBlock objControlBlock - the content block containing the callbacks for panel hide/show
-		*/
+		 * @var ContentBlock objControlBlock - the content block containing the callbacks for panel hide/show
+		 */
 		protected $objControlBlock;
+
 		/**
-		*@var string strShowEditPanelMethod - Callback Method Names
-		*/
+		 * @var string strShowEditPanelMethod - Callback Method Names
+		 */
 		protected $strShowEditPanelMethod;
 		protected $strCloseEditPanelMethod;
 
 		/**
-		*@var AccountAddressEditPanel pnlAddressEditPanel - panel to edit/create an address
-		*/
-		public $pnlAddressEditPanel=null;
+		 * @var AccountAddressEditPanel pnlAddressEditPanel - panel to edit/create an address
+		 */
+		public $pnlAddressEditPanel = null;
+
 		/**
-		*@var AccountPersonEditPanel pnlPersonEditPanel - panel to edit/create a Person
-		*/
-		public $pnlPersonEditPanel=null;
+		 * @var AccountPersonEditPanel pnlPersonEditPanel - panel to edit/create a Person
+		 */
+		public $pnlPersonEditPanel = null;
+
 		/**
-		*@var QDataGrid dtgAddresses - Address Meta DataGrid to list Addresses
-		*/
+		 * @var QDataGrid dtgAddresses - Address Meta DataGrid to list Addresses
+		 */
 		public $dtgAddresses;
+
 		/**
-		*@var QPaginator objPaginator - data page control for datagrid
-		*/
+		 * @var QPaginator objPaginator - data page control for datagrid
+		 */
 		public $objPaginator;
+
 		/**
-		*@var QButton btnCreateNew - button to create a new Address, shows address edit panel
-		*/
+		 * @var QButton btnCreateNew - button to create a new Address, shows address edit panel
+		 */
 		public $btnCreateNew;
+
 		/**
-		*@var QControlProxy pxyEdit - action link in datagrid to edit a specific address, shows edit panel
-		*/
+		 * @var QControlProxy pxyEdit - action link in datagrid to edit a specific address, shows edit panel
+		 */
 		public $pxyEdit;
 
-		public function __construct( $objParentObject,
-									$objControlBlock,
-									$strShowEditPanelMethod,
-									$strCloseEditPanelMethod,
-									$strControlId = null )
-		{
+		public function __construct($objParentObject, $objControlBlock, $strShowEditPanelMethod, $strCloseEditPanelMethod, $strControlId = null) {
 			try {
 				parent::__construct($objParentObject, $strControlId);
 			} catch (QCallerException $objExc) {
@@ -93,7 +97,7 @@ class AccountAddressListPanel extends QPanel{
 
 			// Create an Edit Column
 			$this->pxyEdit = new QControlProxy($this);
-			if(IndexPage::$blnAjaxOk)
+			if (IndexPage::$blnAjaxOk)
 				$this->pxyEdit->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'pxyEdit_Click'));
 			else
 				$this->pxyEdit->AddAction(new QClickEvent(), new QServerControlAction($this, 'pxyEdit_Click'));
@@ -108,44 +112,44 @@ class AccountAddressListPanel extends QPanel{
 			// $this->dtgAddresses->MetaAddTypeColumn('TypeId', 'AddressType');
 
 			$this->btnCreateNew = new QButton($this);
-			$this->btnCreateNew->Text = QApplication::Translate('Create a New') . ' '  . QApplication::Translate('Address');
-			if(IndexPage::$blnAjaxOk)
+			$this->btnCreateNew->Text = QApplication::Translate('Create a New') . ' ' . QApplication::Translate('Address');
+			if (IndexPage::$blnAjaxOk)
 				$this->btnCreateNew->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnCreateNew_Click'));
 			else
 				$this->btnCreateNew->AddAction(new QClickEvent(), new QServerControlAction($this, 'btnCreateNew_Click'));
 		}
 
-		public function pxyEdit_Click($strFormId, $strControlId, $strParameter){
+		public function pxyEdit_Click($strFormId, $strControlId, $strParameter) {
 			$strParameterArray = explode(',', $strParameter);
 			$this->pnlAddressEditPanel = new AccountAddressEditPanel($this,
-																	$this->objControlBlock,
-																	$this->strCloseEditPanelMethod,
-																	$strParameterArray[0]);
+					$this->objControlBlock,
+					$this->strCloseEditPanelMethod,
+					$strParameterArray[0]);
 
 			$strMethodName = $this->strShowEditPanelMethod;
 			$this->objControlBlock->$strMethodName($this->pnlAddressEditPanel);
 		}
 
-		public function btnCreateNew_Click($strFormId, $strControlId, $strParameter){
-			if($this->pnlPersonEditPanel){
+		public function btnCreateNew_Click($strFormId, $strControlId, $strParameter) {
+			if ($this->pnlPersonEditPanel) {
 				$this->pnlPersonEditPanel->RemoveChildControls(true);
 				$this->pnlPersonEditPanel->Visible = false;
 			}
 
-			if($this->pnlAddressEditPanel)
+			if ($this->pnlAddressEditPanel)
 				$this->pnlAddressEditPanel->RemoveChildControls(true);
 
 			$this->pnlAddressEditPanel = new AccountAddressEditPanel($this,
-																	$this->objControlBlock,
-																	$this->strCloseEditPanelMethod,
-																	null);
+					$this->objControlBlock,
+					$this->strCloseEditPanelMethod,
+					null);
 			$this->pnlAddressEditPanel->Visible = true;
 			$strMethodName = $this->strShowEditPanelMethod;
 			$this->objControlBlock->$strMethodName($this->pnlAddressEditPanel);
 		}
 
 		//Callbacks ..
-		public function btnAddPerson_Click($strFormId, $strControlId, $strParameter){
+		public function btnAddPerson_Click($strFormId, $strControlId, $strParameter) {
 			$this->pnlAddressEditPanel->RemoveChildControls(true);
 			$this->pnlAddressEditPanel->Visible = false;
 			$this->pnlPersonEditPanel = new AccountPersonEditPanel($this, $this, 'ClosePersonEditPanel');
@@ -153,28 +157,28 @@ class AccountAddressListPanel extends QPanel{
 			$this->objControlBlock->$strMethodName($this->pnlPersonEditPanel);
 		}
 
-		public function ClosePersonEditPanel($blnChangesMade){
+		public function ClosePersonEditPanel($blnChangesMade) {
 			$this->pnlPersonEditPanel->RemoveChildControls(true);
 			$this->pnlPersonEditPanel->Visible = false;
 			$this->pnlAddressEditPanel = new AccountAddressEditPanel($this,
-																	$this->objControlBlock,
-																	$this->strCloseEditPanelMethod,
-																	null);
+					$this->objControlBlock,
+					$this->strCloseEditPanelMethod,
+					null);
 
 			$strMethodName = $this->strShowEditPanelMethod;
 			$this->objControlBlock->$strMethodName($this->pnlAddressEditPanel);
 		}
 
 		/**
-		* This binds the Datagrid data retrieval to this Person, the addresses listed in the Datagrid will be those
-		* associated with this user in the database. The addresses loaded will be not only the addresses
-		* specific to the user, but also those of others added by this user (eg. addresses of friends and/or
-		* family to whom they may wish to have orders shipped.) via the Address management panel
-		*
-		* If a paginator is set on this DataBinder, it will use it.  If not, then no pagination will be used.
-		* It will also perform any sorting requested in by clicking on the columns in the Datagrid.
-		*/
-		public function AccountAddressDataBinder(){
+		 * This binds the Datagrid data retrieval to this Person, the addresses listed in the Datagrid will be those
+		 * associated with this user in the database. The addresses loaded will be not only the addresses
+		 * specific to the user, but also those of others added by this user (eg. addresses of friends and/or
+		 * family to whom they may wish to have orders shipped.) via the Address management panel
+		 *
+		 * If a paginator is set on this DataBinder, it will use it.  If not, then no pagination will be used.
+		 * It will also perform any sorting requested in by clicking on the columns in the Datagrid.
+		 */
+		public function AccountAddressDataBinder() {
 			$this->aryPersons = array();
 			$this->aryAddresses = array();
 			$aryClauses = array();
@@ -182,13 +186,12 @@ class AccountAddressListPanel extends QPanel{
 
 			// add extra people that may be in address book .. slightly inefficient but it works for now.
 			$this->aryPersons = Person::QueryArray(
-				QQ::OrCondition(
-					QQ::Equal( QQN::Person()->Id, $this->objControlBlock->Account->PersonId),
-					QQ::Equal( QQN::Person()->OwnerPersonId, $this->objControlBlock->Account->PersonId)
-				)
+					QQ::OrCondition(
+						QQ::Equal(QQN::Person()->Id, $this->objControlBlock->Account->PersonId), QQ::Equal(QQN::Person()->OwnerPersonId, $this->objControlBlock->Account->PersonId)
+					)
 			);
 
-			foreach( $this->aryPersons as $objPerson )
+			foreach ($this->aryPersons as $objPerson)
 				$aryPersonIds[] = $objPerson->Id;
 
 			// If a column is selected to be sorted, and if that column has an OrderByClause
@@ -201,8 +204,7 @@ class AccountAddressListPanel extends QPanel{
 				array_push($aryClauses, $objClause);
 
 			$this->aryAddresses = Address::QueryArray(
-				QQ::In( QQN::Address()->PersonId, $aryPersonIds),
-				$aryClauses
+					QQ::In(QQN::Address()->PersonId, $aryPersonIds), $aryClauses
 			);
 
 			if ($this->objPaginator)
@@ -211,6 +213,8 @@ class AccountAddressListPanel extends QPanel{
 			// Set the DataSource to be a Query result from Address, given the clauses above
 			$this->dtgAddresses->DataSource = $this->aryAddresses;
 		}
+
 	}
+
 }
 ?>
