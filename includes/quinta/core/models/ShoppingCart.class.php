@@ -226,7 +226,7 @@
 					$this->objOrder->ShippingCost = null;
 					$this->objOrder->Tax = null;
 					$this->objOrder->CreationDate = null;
-					$this->objOrder->LastModificationDate = null;
+					$this->objOrder->LastModification = null;
 					$this->objOrder->CompletionDate = null;
 					$this->objOrder->Notes = null;
 					$this->objOrder->ShippingMethodId = null;

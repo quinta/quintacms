@@ -29,7 +29,7 @@
 				<?php print Quinta::Translate('Last Changed') . ': '; ?>
 			</td>
 			<td>
-				<?php print $_CONTROL->objOrder->LastModificationDate; ?>
+				<?php print $_CONTROL->objOrder->LastModification; ?>
 			</td>
 		</tr>
 		

@@ -572,7 +572,7 @@
 					' . $objDatabase->SqlVariable($this->intId) . ', 
 					' . $objDatabase->SqlVariable($this->intAccountId) . ',
 					' . $objDatabase->SqlVariable($this->strCreationDate) . ',
-					' . $objDatabase->SqlVariable($this->strLastModificationDate) . ',
+					' . $objDatabase->SqlVariable($this->strLastModification) . ',
 					' . $objDatabase->SqlVariable($this->dttCompletionDate) . ',
 					' . $objDatabase->SqlVariable($this->fltShippingCost) . ',
 					' . $objDatabase->SqlVariable($this->fltProductTotalCost) . ',
@@ -636,7 +636,7 @@
 			if(! $this->dttCompletionDate instanceof QDateTime)
 				$this->dttCompletionDate = new QDateTime();
 			$mixToReturn = null;
-			$strLastModificationDate = date("Y-m-d H:i:s");
+			$strLastModification = date("Y-m-d H:i:s");
 
 			try {
 				if ((!$this->__blnRestored) || ($blnForceInsert))
@@ -687,7 +687,7 @@
 							`type_id`
 						) VALUES (
 							' . $objDatabase->SqlVariable($this->intAccountId) . ',
-							' . $objDatabase->SqlVariable($strLastModificationDate) . ',
+							' . $objDatabase->SqlVariable($strLastModification) . ',
 							' . $objDatabase->SqlVariable($this->dttCompletionDate) . ',
 							' . $objDatabase->SqlVariable($this->fltShippingCost) . ',
 							' . $objDatabase->SqlVariable($this->fltProductTotalCost) . ',
@@ -749,7 +749,7 @@
 						');
 						
 						$objRow = $objResult->FetchArray();
-						if ($objRow[0] != $this->strLastModificationDate)
+						if ($objRow[0] != $this->strLastModification)
 							throw new QOptimisticLockingException('Order');
 					}
 
@@ -759,7 +759,7 @@
 							`order`
 						SET
 							`account_id` = ' . $objDatabase->SqlVariable($this->intAccountId) . ',
-							`last_modification_date` = ' . $objDatabase->SqlVariable($strLastModificationDate) . ',
+							`last_modification_date` = ' . $objDatabase->SqlVariable($strLastModification) . ',
 							`completion_date` = ' . $objDatabase->SqlVariable($this->dttCompletionDate) . ',
 							`shipping_cost` = ' . $objDatabase->SqlVariable($this->fltShippingCost) . ',
 							`product_total_cost` = ' . $objDatabase->SqlVariable($this->fltProductTotalCost) . ',
@@ -825,7 +825,7 @@
 			$objRow = $objResult->FetchArray();
 			$this->strCreationDate = $objRow[0];
 
-			$this->strLastModificationDate = $strLastModificationDate;
+			$this->strLastModification = $strLastModification;
 
 			return $mixToReturn;
 		}
@@ -1106,9 +1106,9 @@
 						$objExc->IncrementOffset();
 						throw $objExc;
 					}
-				case 'LastModificationDate':
+				case 'LastModification':
 					try {
-						return ($this->strLastModificationDate = QType::Cast($mixValue, QType::String));
+						return ($this->strLastModification = QType::Cast($mixValue, QType::String));
 					} catch (QInvalidCastException $objExc) {
 						$objExc->IncrementOffset();
 						throw $objExc;
@@ -1206,7 +1206,7 @@
 			$strToReturn = '';
 			$strToReturn .= ' | intId => ' . $this->intId;
 			$strToReturn .= ' | strCreationDate => ' . $this->strCreationDate;
-			$strToReturn .= ' | strLastModificationDate => ' . $this->strLastModificationDate;
+			$strToReturn .= ' | strLastModification => ' . $this->strLastModification;
 			$strToReturn .= ' | dttCompletionDate => ' . $this->dttCompletionDate;
 			$strToReturn .= ' | fltShippingCost => ' . $this->fltShippingCost;
 			$strToReturn .= ' | fltProductTotalCost => ' . $this->fltProductTotalCost;

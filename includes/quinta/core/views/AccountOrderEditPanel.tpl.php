@@ -6,7 +6,7 @@
 
 		<tr><td><?php $_CONTROL->lblCreationDate->RenderWithName(); ?></td></tr>
 
-		<tr><td><?php $_CONTROL->lblLastModificationDate->RenderWithName(); ?></td></tr>
+		<tr><td><?php $_CONTROL->lblLastModification->RenderWithName(); ?></td></tr>
 
 		<tr><td><?php $_CONTROL->lblCompletionDate->RenderWithName(); ?></td></tr>
 

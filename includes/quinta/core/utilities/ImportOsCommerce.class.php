@@ -203,7 +203,7 @@ class ImportOsCommerce{
 			$objOrder->AccountId = $this->objAccount->Id;
 			$objOrder->Id = $aryRow['orders_id'];
 			$objOrder->CreationDate = $aryRow['date_purchased'];
-			$objOrder->LastModificationDate = $aryRow['last_modified'];
+			$objOrder->LastModification = $aryRow['last_modified'];
 			$objOrder->CompletionDate = $aryRow['orders_date_finished'];
 			
 			$strPaymentMethod = $aryRow['payment_method']; 

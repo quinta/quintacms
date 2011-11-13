@@ -19,7 +19,7 @@
 		public $lblId;
 		public $lstAccount;
 		public $lblCreationDate;
-		public $lblLastModificationDate;
+		public $lblLastModification;
 		public $lblCompletionDate;
 		public $txtShippingCost;
 		public $txtProductTotalCost;
@@ -87,7 +87,7 @@
 			$this->lblId = $this->mctOrder->lblId_Create();
 			$this->lstAccount = $this->mctOrder->lstAccount_Create();
 			$this->lblCreationDate = $this->mctOrder->lblCreationDate_Create();
-			$this->lblLastModificationDate = $this->mctOrder->lblLastModificationDate_Create();
+			$this->lblLastModification = $this->mctOrder->lblLastModification_Create();
 			$this->lblCompletionDate = $this->mctOrder->lblCompletionDate_Create();
 			$this->txtShippingCost = $this->mctOrder->txtShippingCost_Create();
 			$this->txtProductTotalCost = $this->mctOrder->txtProductTotalCost_Create();

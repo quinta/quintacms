@@ -79,7 +79,7 @@
 
 			// Column sizes will need to be tweaked to use these:
 			// $this->dtgOrders->MetaAddColumn('TrackingNumber');
-			// $this->dtgOrders->MetaAddColumn('LastModificationDate');
+			// $this->dtgOrders->MetaAddColumn('LastModification');
 			// $this->dtgOrders->GetColumn(3)->Name = Quinta::Translate('Last Change');
 			// $this->dtgOrders->MetaAddColumn('ShippingCity');
 
