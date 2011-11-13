@@ -1,3 +1,12 @@
+Sunday, November 13, 2011
+
+In theory (and actual practice at least at my house ..) this is now functional on the front end;
+meaning, the CMS engine works, login and blog modules, shopping cart, address book,
+account settings, etc. However, the admin interface (such as it is ..) is still broken.  It is somewhat
+possible that this will drop into an existing QCodo installation and fly - your milage may
+vary and I would only recommend this if you are bored enough to find it entertaining.
+
+
 Tuesday, November 08, 2011:
 
 This is a radical reworking of an old CMS (QuasiCMS) - there is quite alot here
