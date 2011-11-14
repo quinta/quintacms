@@ -48,7 +48,7 @@ if (!defined('__WWWROOT__') || !defined('__QUINTA_SUBDIRECTORY__')) {
 
 define('__QUINTA_WWWROOT__', __WWWROOT__ . __QUINTA_SUBDIRECTORY__);
 $thisdir = dirname(__FILE__);
-define('__QUINTA_ABSROOT__', $thisdir . '/../../' );
+define('__QUINTA_ABSROOT__', $thisdir . '/../..' );
 define('__QUINTA_LIBDIR__', __QUINTA_ABSROOT__ . '/includes/quinta');
 define('__QUINTA_DBDIR__', __QUINTA_ABSROOT__ . '/database');
 

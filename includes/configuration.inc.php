@@ -21,7 +21,7 @@
 			define ('__VIRTUAL_DIRECTORY__', '');
 
 			define('__DOCROOT__', rtrim($_SERVER['DOCUMENT_ROOT'], '/'));
-			//if Qcodo is in the docroot, just leave _SUBDIRECTORY__ empty
+			//if Qcodo's "www/" is the docroot, just leave _SUBDIRECTORY__ empty
 			if (file_exists(__DOCROOT__ . '/../includes/configuration.inc.php')){
 				define('__SUBDIRECTORY__', '');
 			} else {
