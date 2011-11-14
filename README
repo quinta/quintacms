@@ -1,13 +1,50 @@
 Sunday, November 13, 2011
 
-In theory (and actual practice at least at my house ..) this is now functional on the front end;
+In theory (and actual practice at least at my house ..) this is now functional mostly;
 meaning, the CMS engine works, login and blog modules, shopping cart, address book,
-account settings, etc. However, the admin interface (such as it is ..) is still broken.  It is somewhat
-possible that this will drop into an existing QCodo installation and fly - your milage may
-vary and I would only recommend this if you are bored enough to find it entertaining.
+account settings, etc. Quinta should now drop into an existing QCodo installation and fly
+- your mileage may vary and I would only recommend this for production unless you really
+know what you are doing.
 
+That said, here are the requirements:
+* MySQL >= 5 (there is only a schema for MySQL at the moment)
+* PHP >= 5.2
+* access to the database to create an account.
+* http server..
+* QCodo >= 4.2
 
-Tuesday, November 08, 2011:
+Installation:
+1. Download either a zip, tar.gz or using git.
+2. Put it in place:
+Either unzip directly over (ie. into) an existing QCodo
+or copy the contents of the base directory (quinta/) into
+the QCodo directory - meaning the _base_ of the QCodo
+installation. Ex:
 
-This is a radical reworking of an old CMS (QuasiCMS) - there is quite alot here
-but it is not, as of this writing functional. Soon.
+git clone http://github.com/quintacms/quinta  mytempdir/quinta
+cp -r mytempdir/quinta/* my_qcodo_installation_dir/
+
+Basically the same will work with a zip or tar.gz.
+
+3. In your favorite (not IE) browser, visit the installation, ex:
+http://localhost/quinta/install.php
+
+If you have created a database, fine - if not, the installation
+will create one and the quinta user/password from the install
+page.
+
+4. That's all. Done.
+
+For the version bundled with QCodo you can simply unpack
+the whole thing and make sure that the www/ folder is available
+to the webserver. For instance, in Ubuntu or Debian:
+
+mv quinta-with-qcodo.tar.gz ~/public/html
+cd ~/public/html
+tar xzvf quinta-with-qcodo.tar.gz
+cd /var/www
+sudo ln -s ~/public/html/quinta/www quinta
+
+LICENSE: see http://unlicense.org
+
+Enjoy.
