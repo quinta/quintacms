@@ -21,8 +21,8 @@ or copy the contents of the base directory (quinta/) into
 the QCodo directory - meaning the _base_ of the QCodo
 installation. Ex:
 
-git clone http://github.com/quintacms/quinta  mytempdir/quinta
-cp -r mytempdir/quinta/* my_qcodo_installation_dir/
+git clone http://github.com/quinta/quintacms  mytempdir/quintacms
+cp -r mytempdir/quintacms/* my_qcodo_installation_dir/
 
 Basically the same will work with a zip or tar.gz.
 
@@ -33,17 +33,24 @@ If you have created a database, fine - if not, the installation
 will create one and the quinta user/password from the install
 page.
 
-4. That's all. Done.
+4. That's all. Done, if you chose the example install (with
+	example data, recommend) Quinta should be at
+	http://localhost/quintacms
 
 For the version bundled with QCodo you can simply unpack
 the whole thing and make sure that the www/ folder is available
-to the webserver. For instance, in Ubuntu or Debian:
+to the webserver. As with QCodo, the Quinta installation and
+includes are placed _outside_ the webserver directory one level
+above.
+
+Either way the www/ folder can be made visible
+for instance, in Ubuntu or Debian like this:
 
 mv quinta-with-qcodo.tar.gz ~/public/html
 cd ~/public/html
 tar xzvf quinta-with-qcodo.tar.gz
 cd /var/www
-sudo ln -s ~/public/html/quinta/www quinta
+sudo ln -s ~/public/html/quinta/www quintacms
 
 LICENSE: see http://unlicense.org
 
