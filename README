@@ -53,6 +53,12 @@ cp -r mytempdir/quintacms/* my_qcodo_installation_dir/
 
 Basically the same will work with a zip or tar.gz.
 
+CAUTION: This should be done in a fresh QCodo directory - a few
+files like www/index.* configuration.inc.php and custom codegen
+templates are included and may overwrite any customizations.
+If you prefer you can down load the bundled version with QCodo
+included from the downloads section.
+
 3. In your favorite (not IE) browser, visit the installation, ex:
 http://localhost/quinta/install.php
 
