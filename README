@@ -62,6 +62,18 @@ included from the downloads section.
 3. In your favorite (not IE) browser, visit the installation, ex:
 http://localhost/quinta/install.php
 
+NOTE: the file includes/configuration.inc.php must be writable
+by the webserver - in linux:
+
+ chmod a+w configuration.inc.php
+ or
+ sudo chown myusername.www-data configuration.inc.php
+ chmod g+w configuration.inc.php
+
+IMPORTANT: change the permissions back after the install -
+it should be readable but not writable by the webserver
+(in Debian/Mint/Ubuntu systems "www-data").
+
 If you have created a database, fine - if not, the installation
 will create one and the quinta user/password from the install
 page.
