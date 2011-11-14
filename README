@@ -1,10 +1,37 @@
-Sunday, November 13, 2011
+                     **** Quinta CMS ****
+      An extensible Qcodo powered e-commerce CMS platform
 
-In theory (and actual practice at least at my house ..) this is now functional mostly;
-meaning, the CMS engine works, login and blog modules, shopping cart, address book,
-account settings, etc. Quinta should now drop into an existing QCodo installation and fly
-- your mileage may vary and I would only recommend this for production unless you really
-know what you are doing.
+Quinta CMS is a development platform for building and maintaining websites
+powered by the QCodo web development framework. It is intended as an aid for
+QCodo developers to take care of many of the "boilerplate" tasks involved in
+setting up a website. Quinta is designed to be simple to use, easy to extend and
+very flexible. Out of the box it provides:
+
+	* User accounts and login
+	* Administrative back end
+	* Basic website framework (comes with an example)
+	* Blog module
+	* Ecommerce payment modules (including PayPal, AuthorizeNet)
+	* Orders and products
+	* Live shipping estimate module (FedEx, USPS)
+	* Shipping label printing (Endicia, FedEx)
+	* Module framework
+	* Page CSS and Javascript settings
+	* Content block CSS class settings
+
+ Quinta is intended to be themed using CSS and modified to suit individual needs.
+
+ As of this release (Version 0.3), Quinta is in a very early stage - this release
+is functional but under development, there is much to be done.
+WARNING: At the risk of repeating myself, this is a very early version! I am not
+a security expert and Quinta has yet to be audited for security!! I have done what
+I can but there is No Guarantee - USE AT YOUR OWN RISK!!
+
+In theory (and actual practice at least at my house ..) this is now functional
+mostly; meaning, the CMS engine works, login and blog modules, shopping
+cart, address book, account settings, etc. Quinta should now drop into an
+existing QCodo installation and fly - but your mileage may vary and I would
+not recommend this for production unless you really know what you are doing.
 
 That said, here are the requirements:
 * MySQL >= 5 (there is only a schema for MySQL at the moment)
@@ -54,4 +81,4 @@ sudo ln -s ~/public/html/quinta/www quintacms
 
 LICENSE: see http://unlicense.org
 
-Enjoy.
+Peace.
