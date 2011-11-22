@@ -1835,3 +1835,11 @@ ALTER TABLE `tracking_number`
 ALTER TABLE `zone_type`
   ADD CONSTRAINT `zone_type_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `country_type` (`id`) ON DELETE CASCADE;
 SET FOREIGN_KEY_CHECKS=1;
+
+-- auto update last_modification fields ..
+CREATE TRIGGER content_item_last_mod BEFORE UPDATE ON content_item FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER address_last_mod BEFORE UPDATE ON address FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER order_address_last_mod BEFORE UPDATE ON order_address FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER order_last_mod BEFORE UPDATE ON `order` FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER shopping_cart_last_mod BEFORE UPDATE ON shopping_cart FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER page_last_mod BEFORE UPDATE ON page FOR EACH ROW SET NEW.last_modification = NOW();

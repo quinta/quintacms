@@ -1739,6 +1739,13 @@ INSERT INTO `zone_type` (`id`, `country_id`, `code`, `name`) VALUES
 (188, 13, 'VIC', 'Victoria'),
 (189, 13, 'WA', 'Western Australia');
 
+-- auto update last_modification fields ..
+CREATE TRIGGER content_item_last_mod BEFORE UPDATE ON content_item FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER address_last_mod BEFORE UPDATE ON address FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER order_address_last_mod BEFORE UPDATE ON order_address FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER order_last_mod BEFORE UPDATE ON `order` FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER shopping_cart_last_mod BEFORE UPDATE ON shopping_cart FOR EACH ROW SET NEW.last_modification = NOW();
+CREATE TRIGGER page_last_mod BEFORE UPDATE ON page FOR EACH ROW SET NEW.last_modification = NOW();
 
 -- now we need some views for order totals, shipping, tax etc ..
 /*
