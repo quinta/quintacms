@@ -18,7 +18,7 @@ define("CREATEACCOUNTMODULE.CLASS.PHP",1);
 * and only one Person, a Person may have many Persons and Addresses
 * which will be associated with the original Person for the Account.
 * 
-*@version 0.1
+*@version 0.3
 *
 *@package Quinta
 * @subpackage Modules

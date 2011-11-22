@@ -9,8 +9,8 @@
 	* class, which contains all the basic CRUD-type functionality as well as
 	* basic methods to handle relationships and index-based loading.
 	*
-	* @package Quasi
-	* @subpackage ORM
+	* @package Quinta
+	* @subpackage Models
 	*
 	*/
 	class Account extends AccountGen {

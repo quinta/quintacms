@@ -13,7 +13,7 @@
 	 * tax_rate_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class TaxRateEditPanel extends QPanel {
 		// Local instance of the TaxRateMetaControl

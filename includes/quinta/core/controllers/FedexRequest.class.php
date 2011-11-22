@@ -30,7 +30,7 @@ define("FEDEXREQUEST.CLASS.PHP",1);
 * 
 *@author Erik Winn <sidewalksoftware@gmail.com>
 *
-*@version 0.1
+*@version 0.3
 *
 *@package Quinta
 * @subpackage Classes

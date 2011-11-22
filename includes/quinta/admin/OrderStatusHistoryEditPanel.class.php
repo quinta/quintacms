@@ -13,7 +13,7 @@
 	 * order_status_history_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class OrderStatusHistoryEditPanel extends QPanel {
 		// Local instance of the OrderStatusHistoryMetaControl

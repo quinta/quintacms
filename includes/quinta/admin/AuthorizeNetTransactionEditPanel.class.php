@@ -13,7 +13,7 @@
 	 * authorize_net_transaction_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta CMS
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class AuthorizeNetTransactionEditPanel extends QPanel {
 		// Local instance of the AuthorizeNetTransactionMetaControl

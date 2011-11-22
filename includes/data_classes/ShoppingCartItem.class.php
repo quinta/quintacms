@@ -10,7 +10,7 @@
 	 * basic methods to handle relationships and index-based loading.
 	 * 
 	 * @package Quinta CMS
-	 * @subpackage DataObjects
+	 * @subpackage Models
 	 * 
 	 */
 	class ShoppingCartItem extends ShoppingCartItemGen {

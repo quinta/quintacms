@@ -13,7 +13,7 @@
 	 * content_block_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class ContentBlockEditPanel extends QPanel {
 		// Local instance of the ContentBlockMetaControl

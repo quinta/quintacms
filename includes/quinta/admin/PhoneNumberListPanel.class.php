@@ -14,7 +14,7 @@
 	 * code generation.
 	 * 
 	 * @package Quinta CMS
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 * 
 	 */
 	class PhoneNumberListPanel extends QPanel {

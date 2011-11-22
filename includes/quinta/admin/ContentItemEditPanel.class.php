@@ -13,7 +13,7 @@
 	 * content_item_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class ContentItemEditPanel extends QPanel {
 		// Local instance of the ContentItemMetaControl

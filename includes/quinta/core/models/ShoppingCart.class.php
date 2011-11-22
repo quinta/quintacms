@@ -11,7 +11,7 @@
 	 * current contents of the cart - see CreateNewOrder below.
 	 *   
 	 * @package Quinta
-	 * @subpackage ORM
+	 * @subpackage Models
 	 * 
 	 */
 	class ShoppingCart extends ShoppingCartGen

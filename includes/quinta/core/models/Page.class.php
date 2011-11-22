@@ -23,7 +23,7 @@
 	 * a database schema change.
 	 *
 	 * @package Quinta
-	 * @subpackage ORM
+	 * @subpackage Models
 	 * 
 	 */
 	class Page extends PageGen {

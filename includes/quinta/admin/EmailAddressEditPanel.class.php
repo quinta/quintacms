@@ -13,7 +13,7 @@
 	 * email_address_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta CMS
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class EmailAddressEditPanel extends QPanel {
 		// Local instance of the EmailAddressMetaControl

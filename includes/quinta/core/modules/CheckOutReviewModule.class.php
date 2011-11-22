@@ -8,7 +8,7 @@ define("CHECKOUTREVIEWMODULE.CLASS.PHP",1);
 * Class CheckOutReviewModule - provides display of order information for review during checkout
 *@author Erik Winn <sidewalksoftware@gmail.com>
 *
-*@version 0.1
+*@version 0.3
 *
 *@package Quinta
 * @subpackage Modules

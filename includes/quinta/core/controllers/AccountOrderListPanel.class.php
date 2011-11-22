@@ -4,7 +4,7 @@
 	* This class provides a panel in which to list orders
 	* from within a user account owned by that user.
 	*
-	*@version 0.1
+	*@version 0.3
 	*
 	* @package Quinta
 	* @subpackage Classes

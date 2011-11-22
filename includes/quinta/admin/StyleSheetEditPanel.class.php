@@ -13,7 +13,7 @@
 	 * style_sheet_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class StyleSheetEditPanel extends QPanel {
 		// Local instance of the StyleSheetMetaControl

@@ -13,7 +13,7 @@
 	 * shipping_method_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class ShippingMethodEditPanel extends QPanel {
 		// Local instance of the ShippingMethodMetaControl

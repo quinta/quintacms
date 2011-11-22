@@ -27,7 +27,7 @@
 	 *  and multiple packages are not handled. this needs work and perhaps some refactoring of design ..
 	 *   
 	 * @package Quinta
-	 * @subpackage ORM
+	 * @subpackage Models
 	 * 
 	 */
 	class ShippingMethod extends ShippingMethodGen

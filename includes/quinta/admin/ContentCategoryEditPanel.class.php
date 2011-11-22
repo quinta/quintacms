@@ -13,7 +13,7 @@
 	 * content_category_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class ContentCategoryEditPanel extends QPanel {
 		// Local instance of the ContentCategoryMetaControl

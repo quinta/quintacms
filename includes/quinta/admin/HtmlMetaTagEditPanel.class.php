@@ -13,7 +13,7 @@
 	 * html_meta_tag_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class HtmlMetaTagEditPanel extends QPanel {
 		// Local instance of the HtmlMetaTagMetaControl

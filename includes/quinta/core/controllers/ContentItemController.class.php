@@ -14,10 +14,10 @@ if(!defined('QUINTACMS') ) die("No quinta.");
 	*
 	*@author Erik Winn <sidewalksoftware@gmail.com>
 	*
-	*@version 0.1
+	*@version 0.3
 	*
 	* @package Quinta
-	* @subpackage Views
+	* @subpackage Controllers
 	 */
 
 	class ContentItemController extends QPanel{

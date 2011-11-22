@@ -13,7 +13,7 @@
 	 * order_address_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta CMS
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class OrderAddressEditPanel extends QPanel {
 		// Local instance of the OrderAddressMetaControl

@@ -13,7 +13,7 @@
 	 * However, they may be used as simple database indepedant enumerated type.
 	 * 
 	 * @package Quinta
-	 * @subpackage ORM
+	 * @subpackage Models
 	 */
 	abstract class AccountType extends AccountTypeGen {
 	}

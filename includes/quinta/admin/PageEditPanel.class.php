@@ -13,7 +13,7 @@
 	 * page_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class PageEditPanel extends QPanel {
 		// Local instance of the PageMetaControl

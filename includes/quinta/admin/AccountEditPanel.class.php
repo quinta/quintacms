@@ -1,30 +1,20 @@
 <?php
-	/**
-	 * This is a quick-and-dirty draft QPanel object to do Create, Edit, and Delete functionality
-	 * of the Account class.  It uses the code-generated
-	 * AccountMetaControl class, which has meta-methods to help with
-	 * easily creating/defining controls to modify the fields of a Account columns.
+	/** @brief A panel for editing Account information
 	 *
-	 * Any display customizations and presentation-tier logic can be implemented
-	 * here by overriding existing or implementing new methods, properties and variables.
-	 *
-	 * NOTE: This file is overwritten on any code regenerations.  If you want to make
-	 * permanent changes, it is STRONGLY RECOMMENDED to move both account_edit.php AND
-	 * account_edit.tpl.php out of this Form Drafts directory.
-	 *
+	 * This panel presents the information associated with an account
+	 * in the CMS.
+	 * 
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class AccountEditPanel extends QPanel {
-		// Local instance of the AccountMetaControl
 		protected $mctAccount;
 		protected $objAccount;
 		protected $pnlListPanel;
-
+		//Controls for listing orders associated with this account
 		public $dtgOrders;
 		public $objPaginator;
 		public $pxyViewOrder;
-
 		// Controls for Account's Data Fields
 		public $lblId;
 		public $lblRegistrationDate;
@@ -39,22 +29,16 @@
 		public $lstType;
 		public $lstStatus;
 		public $lblPerson;
-
-		// Other ListBoxes (if applicable) via Unique ReverseReferences and ManyToMany References
-
-		// Other Controls
+		// Action controls
 		public $btnSave;
 		public $btnDelete;
 		public $btnCancel;
 
-		// Callback
 		protected $strClosePanelMethod;
 
-		public function __construct($objParentObject, $strClosePanelMethod, $intId = null, $strControlId = null)
-		{
+		public function __construct($objParentObject, $strClosePanelMethod, $intId = null, $strControlId = null){
 			$this->pnlListPanel =& $objParentObject;
 
-			// Call the Parent
 			try {
 				parent::__construct($objParentObject, $strControlId);
 			} catch (QCallerException $objExc) {
@@ -62,15 +46,11 @@
 				throw $objExc;
 			}
 
-			// Setup Callback and Template
 			$this->strTemplate = 'AccountEditPanel.tpl.php';
 			$this->strClosePanelMethod = $strClosePanelMethod;
-
-			// Construct the AccountMetaControl
-			// MAKE SURE we specify "$this" as the MetaControl's (and thus all subsequent controls') parent
 			$this->mctAccount = AccountMetaControl::Create($this, $intId);
 			$this->objAccount =& $this->mctAccount->Account;
-			// Call MetaControl's methods to create qcontrols based on Account's data fields
+
 			$this->lblId = $this->mctAccount->lblId_Create();
 			$this->lblRegistrationDate = $this->mctAccount->lblRegistrationDate_Create();
 			$this->txtUsername = $this->mctAccount->txtUsername_Create();
@@ -100,7 +80,6 @@
 			$this->pxyViewOrder->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'pxyViewOrder_Click'));
 
 			$this->dtgOrders->MetaAddProxyColumn($this->pxyViewOrder, 'Id');
-
 			$this->dtgOrders->MetaAddColumn('CreationDate');
 			$this->dtgOrders->MetaAddColumn('LastModification');
 			$this->dtgOrders->MetaAddColumn('CompletionDate');
@@ -115,7 +94,6 @@
 			$objOrderTotalColumn = new QDataGridColumn('Order Total', $strOrderTotalParam );
 			$this->dtgOrders->AddColumn($objOrderTotalColumn);
 
-			// Create Buttons
 			$this->btnSave = new QButton($this);
 			$this->btnSave->Text = QApplication::Translate('Save');
 			$this->btnSave->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnSave_Click'));
@@ -138,34 +116,34 @@
 		* If a paginator is set on this DataBinder, it will use it.  If not, then no pagination will be used.
 		* It will also perform any sorting requested in by clicking on the column titles in the Datagrid.
 		*/
-		public function AccountOrderDataBinder()
-		{
+		public function AccountOrderDataBinder(){
 			if ($this->objPaginator)
-				$this->dtgOrders->TotalItemCount = Order::CountByAccountId($this->objAccount->Id) ;
-
+				$this->dtgOrders->TotalItemCount = Order::CountByAccountId($this->objAccount->Id);
 			$objClauses = array();
-
 			// If a column is selected to be sorted, and if that column has a OrderByClause set on it, then let's add
 			// the OrderByClause to the $objClauses array - this is in the datagrid if the user clicks on column title
 			if ($objClause = $this->dtgOrders->OrderByClause)
 				array_push($objClauses, $objClause);
-
 			// Add the LimitClause information, as well
 			if ($objClause = $this->dtgOrders->LimitClause)
 				array_push($objClauses, $objClause);
-
 			array_push($objClauses, QQ::OrderBy(QQN::Order()->CreationDate, false) );
-
-
 			$this->dtgOrders->DataSource = Order::LoadArrayByAccountId(
-				$this->objAccount->Id, $objClauses
-			);
+						$this->objAccount->Id, $objClauses
+					);
 		}
 
-		public function pxyViewOrder_Click($strFormId, $strControlId, $strParameter)
-		{
-			//die($strParameter);
-
+		/**
+		* @brief Callback to view an order in the list
+		*
+		*@todo - fix this ..
+		* 
+		* @param strFormId ...
+		* @param strControlId ...
+		* @param strParameter ...
+		* @return void
+		**/
+		public function pxyViewOrder_Click($strFormId, $strControlId, $strParameter){
 			$strParameterArray = explode(',', $strParameter);
 
 //            $objEditPanel = new OrderEditPanel($this, $this->strCloseEditPanelMethod, $strParameterArray[0]);
@@ -177,16 +155,12 @@
 			$this->objForm->SetEditPane($objEditPanel);
 		}
 
-
-		// Control AjaxAction Event Handlers
 		public function btnSave_Click($strFormId, $strControlId, $strParameter) {
-			// Delegate "Save" processing to the AccountMetaControl
 			$this->mctAccount->SaveAccount();
 			$this->CloseSelf(true);
 		}
 
 		public function btnDelete_Click($strFormId, $strControlId, $strParameter) {
-			// Delegate "Delete" processing to the AccountMetaControl
 			$this->mctAccount->DeleteAccount();
 			$this->CloseSelf(true);
 		}
@@ -195,7 +169,6 @@
 			$this->CloseSelf(false);
 		}
 
-		// Close Myself and Call ClosePanelMethod Callback
 		protected function CloseSelf($blnChangesMade) {
 			$strMethod = $this->strClosePanelMethod;
 			$this->objForm->$strMethod($blnChangesMade);

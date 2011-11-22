@@ -13,7 +13,7 @@
 	 * phone_number_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta CMS
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class PhoneNumberEditPanel extends QPanel {
 		// Local instance of the PhoneNumberMetaControl

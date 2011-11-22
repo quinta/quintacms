@@ -13,7 +13,7 @@
 	 *   
 	 * $Id: Order.class.php 514 2009-03-19 15:43:15Z erikwinn $
 	 * @package Quinta
-	 * @subpackage ORM
+	 * @subpackage Models
 	 * 
 	 */
 	class Order extends OrderGen

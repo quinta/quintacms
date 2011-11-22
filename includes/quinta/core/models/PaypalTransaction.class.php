@@ -10,7 +10,7 @@
 	 * basic methods to handle relationships and index-based loading.
 	 * 
 	 * @package Quinta
-	 * @subpackage ORM
+	 * @subpackage Models
 	 * 
 	 */
 	class PaypalTransaction extends PaypalTransactionGen {

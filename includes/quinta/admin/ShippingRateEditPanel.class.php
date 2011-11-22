@@ -13,7 +13,7 @@
 	 * shipping_rate_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class ShippingRateEditPanel extends QPanel {
 		// Local instance of the ShippingRateMetaControl

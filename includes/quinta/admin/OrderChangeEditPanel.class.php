@@ -13,7 +13,7 @@
 	 * order_change_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class OrderChangeEditPanel extends QPanel {
 		// Local instance of the OrderChangeMetaControl

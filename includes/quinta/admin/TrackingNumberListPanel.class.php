@@ -14,7 +14,7 @@
 	 * code generation.
 	 * 
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 * 
 	 */
 	class TrackingNumberListPanel extends QPanel {

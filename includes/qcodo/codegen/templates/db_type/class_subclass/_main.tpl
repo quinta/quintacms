@@ -14,7 +14,7 @@
      * However, they may be used as simple database indepedant enumerated type.
      * 
      * @package <%= QCodeGen::$ApplicationName; %>
-     * @subpackage DataObjects
+     * @subpackage Models
      */
     abstract class <%= $objTypeTable->ClassName %> extends <%= $objTypeTable->ClassName %>Gen {
     }

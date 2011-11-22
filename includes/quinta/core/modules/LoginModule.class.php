@@ -18,8 +18,8 @@ define("LOGINMODULE.CLASS.PHP",1);
 * error message is displayed.
 *
 * This module also provides a link to a registration page and a password retrieval
-* page - these should exist in the page table and contain modules for each of these
-* functions (CreateAccountModule and LostPasswordModule).
+* page - these should exist in the page table and be assigned the modules for each
+* of these functions (CreateAccountModule and LostPasswordModule).
 *
 * The module stores an Account object in serialized form in $_SESSION['AccountLogin']
 *  if login succeeds. Session timeout as configured for PHP determines the idle timeout.
@@ -33,26 +33,26 @@ define("LOGINMODULE.CLASS.PHP",1);
 *
 *@author Erik Winn <sidewalksoftware@gmail.com>
 *
-*@version 0.1
+*@version 0.3
 *
 *@package Quinta
 * @subpackage Modules
 */
 	class LoginModule extends QPanel{
-		// Our control block
+		/// @var  Our parent control block
 		protected $objControlBlock;
-		//Local reference to the Account object
+		/// @var Local reference to the Account object
 		protected $objAccount;
-		//shows "you are signed in as .."
+		/// @var shows "you are signed in as .."
 		public $lblSignedInAs;
-		//shows the login duration, just for fun ..
+		/// @var shows the login duration, just for fun ..
 		public $lblLoginSpan;
-		// Shopping cart status display ..
+		/// @var  Shopping cart status display ..
 		public $lblShoppingCartStatus;
-		//Input Controls 
+		/// @var Input Controls
 		public $txtUsername;
 		public $txtPassword;
-		// Button Controls
+		/// @var  Button Controls
 		public $btnLogin;
 		public $btnLogout;
 
@@ -83,7 +83,6 @@ define("LOGINMODULE.CLASS.PHP",1);
 				$this->txtUsername = new QTextBox($this, 'username');
 				$this->txtUsername->Required = true;
 				$this->txtUsername->TabIndex = 1;
-//                $this->txtUsername->Name = 'Username: ';                
 				$this->txtUsername->Text = 'username';
 				$this->txtUsername->AddAction(new QFocusEvent(), new QJavaScriptAction( 'clearText(this)'));
 
@@ -115,6 +114,7 @@ define("LOGINMODULE.CLASS.PHP",1);
 			}else{//otherwise, set up various logged in info ..
 				$this->btnLogout = new QButton($this, "LogoutButton");
 				$this->btnLogout->Text = Quinta::Translate('Logout');
+
 /* eh, this may be causing a bug
 				if(IndexPage::$blnAjaxOk)
 					$this->btnLogout->AddAction(new QClickEvent(), new QAjaxControlAction($this, 'btnLogout_Click'));
@@ -127,9 +127,11 @@ define("LOGINMODULE.CLASS.PHP",1);
 			}
 		}
 
-		/**
+		/** @brief Check an OsCommerce style password
+		 * 
 		* Quinta supports importing user accounts from OsCommerce - this function checks an OSC style
-		* encryption.
+		* encryption - thus allowing direct import from the old shopping cart.
+		* @todo - inform users that they should change these ..
 		*@param string strInput - the input string
 		*@param string strStored - the stored encrypted string
 		*@return bool true if valid
@@ -159,9 +161,16 @@ define("LOGINMODULE.CLASS.PHP",1);
 			return false;
 		}
 		
-		/**
+		/** @brief Check login
+		 * 
 		 * This Function is called when the login button is clicked - it checks the login data
-		 * returning false if it fails. Failure results in redrawing the form with error messages.
+		 * returning false if it fails including a password and username check and a check
+		 * to see that all fields were filled. Additionally, this function supports a check for
+		 * onetime passwords sent from the "lost password" system which sets valid_password
+		 * to false when sending a reset.
+		 * 
+		 * Failure results in redrawing the form with error messages.
+		 * @return true on successful login
 		 */
 		public function Validate(){
 			$blnPassed = false;
@@ -234,7 +243,7 @@ define("LOGINMODULE.CLASS.PHP",1);
 			Quinta::Redirect(__QUINTA_SUBDIRECTORY__ . '/index.php/Home');
 		}
 		/**
-		* This a little label indicating who the user is logged it as
+		* @brief This creates a little label showing who the user is logged in as.
 		*/
 		public function lblSignedInAs_Create(){
 			$this->lblSignedInAs = new QLabel($this, "SignedInAs");
@@ -246,7 +255,7 @@ define("LOGINMODULE.CLASS.PHP",1);
 			}
 		}
 		/**
-		* Here we create a little label indicating how long the user has been logged in.
+		* @brief This creates a little label indicating how long the user has been logged in.
 		* Note: This is only updated on a full page load.
 		*/
 		public function lblLoginSpan_Create(){
@@ -260,7 +269,7 @@ define("LOGINMODULE.CLASS.PHP",1);
 		}
 		
 		/**
-		* This creates a small display of the shopping cart status
+		* @brief This creates a small display of the shopping cart status
 		* Note: This is only updated on a full page load.
 		*/
 		public function lblShoppingCartStatus_Create(){
@@ -276,9 +285,9 @@ define("LOGINMODULE.CLASS.PHP",1);
 						 $strText .= Quinta::Translate('items') . ' ';
 					else
 						 $strText .= Quinta::Translate('item') . ' ';
-				}else
+				}else{
 					$strText .= Quinta::Translate('No items') . ' ';
-					
+				}
 				$strText .= Quinta::Translate('in your') . ' ';
 				
 				if($intItemCount)

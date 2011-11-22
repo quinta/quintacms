@@ -10,7 +10,7 @@
 	 * basic methods to handle relationships and index-based loading.
 	 * 
 	 * @package Quinta CMS
-	 * @subpackage DataObjects
+	 * @subpackage Models
 	 * 
 	 */
 	class EmailAddress extends EmailAddressGen {
@@ -24,7 +24,7 @@
 		 * @return string a nicely formatted string representation of this object
 		 */
 		public function __toString() {
-			return sprintf('EmailAddress Object %s',  $this->intId);
+			return $this->Url;
 		}
 
 

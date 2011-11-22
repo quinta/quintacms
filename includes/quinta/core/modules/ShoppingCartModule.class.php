@@ -20,7 +20,7 @@ define("SHOPPINGCARTMODULE.CLASS.PHP",1);
 *@todo
 *   - add total price (incl. shipping) estimates
 * 
-*@version 0.1
+*@version 0.3
 *
 *@package Quinta
 * @subpackage Modules

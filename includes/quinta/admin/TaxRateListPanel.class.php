@@ -14,7 +14,7 @@
 	 * code generation.
 	 * 
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 * 
 	 */
 	class TaxRateListPanel extends QPanel {

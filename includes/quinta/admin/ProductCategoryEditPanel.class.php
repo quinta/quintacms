@@ -13,7 +13,7 @@
 	 * product_category_edit.tpl.php out of this Form Drafts directory.
 	 *
 	 * @package Quinta
-	 * @subpackage Drafts
+	 * @subpackage AdminUI
 	 */
 	class ProductCategoryEditPanel extends QPanel {
 		// Local instance of the ProductCategoryMetaControl
