@@ -131,7 +131,6 @@ class InstallationForm extends QForm {
 			//!TODO - make smarter, this will work only on a local database .. 
 			. $this->txtDatabaseUser->Text . '@localhost IDENTIFIED BY "'
 			. $this->txtDatabasePassword->Text . '" ;\' ';
-			die($strCommand);
 		$aryErrors = array();
 		$intRetval = 0;
 		$blnFork = exec($strCommand, $aryErrors, $intRetval);
