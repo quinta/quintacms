@@ -112,6 +112,7 @@ class InstallationForm extends QForm {
 		$aryErrors = array();
 		$intRetval = 0;
 		$blnFork = exec($strCommand, $aryErrors, $intRetval);
+		//! TODO: catch errors - even if mysql fails exec is not catching the errors .. dunno why.
 		if (false === $blnFork || 0 != $intRetval) {
 			$this->strErrors .= 'Failed to install data - command: ' . $strCommand;
 			foreach ($aryErrors as $strError)
@@ -127,8 +128,10 @@ class InstallationForm extends QForm {
 			$strCommand .= ' -p' . $this->txtDatabaseAdminPassword->Text;
 		$strCommand .= " -e ' CREATE DATABASE " . $this->txtDatabaseName->Text . ';'
 			. ' GRANT ALL PRIVILEGES ON ' . $this->txtDatabaseName->Text . '.* TO '
-			. $this->txtDatabaseUser->Text . ' IDENTIFIED BY "'
+			//!TODO - make smarter, this will work only on a local database .. 
+			. $this->txtDatabaseUser->Text . '@localhost IDENTIFIED BY "'
 			. $this->txtDatabasePassword->Text . '" ;\' ';
+			die($strCommand);
 		$aryErrors = array();
 		$intRetval = 0;
 		$blnFork = exec($strCommand, $aryErrors, $intRetval);

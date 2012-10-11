@@ -59,7 +59,13 @@ templates are included and may overwrite any customizations.
 If you prefer you can down load the bundled version with QCodo
 included from the downloads section.
 
-3. In your favorite (not IE) browser, visit the installation, ex:
+On Debian/Ubuntu you can then make a quick symlink to make 
+the installation available to the browser:
+
+cd /var/www
+sudo ln -s my_qcodo_installation_dir/www quinta
+
+3. In your favorite browser, visit the installation, ex:
 http://localhost/quinta/install.php
 
 NOTE: the file includes/configuration.inc.php must be writable
@@ -79,8 +85,15 @@ will create one and the quinta user/password from the install
 page.
 
 4. That's all. Done, if you chose the example install (with
-	example data, recommend) Quinta should be at
-	http://localhost/quintacms
+example data, recommend) Quinta should be at
+	http://localhost/quinta
+ The admin interface at
+	http://localhost/quinta/admin
+	
+PLEASE NOTE: the admin interface is currently NOT  yet integrated 
+with the CMS and NOT PROTECTED.  AGAIN, USE AT YOUR OWN
+RISK - IT IS NOT SECURE. What is provided is the CRUD scaffolding
+for modification only. It must be secured for production use!!
 
 For the version bundled with QCodo you can simply unpack
 the whole thing and make sure that the www/ folder is available
